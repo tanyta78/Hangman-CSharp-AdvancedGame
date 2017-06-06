@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using Console = Colorful.Console;
 using System.Linq;
+using System.Xml.Serialization;
 
 namespace Hangman
 {
     class Program
     {
 
-        static void Main(string[] args)
+        static void Main()
         {
             Random r = new Random();
             List<string> words = new List<string>();
@@ -25,11 +28,13 @@ namespace Hangman
             string letterChoice = "";
             while (String.Join("", board) != word && letterChoice != "QUIT")
             {
+                int missedLetters = 0;
                 DisplayBoard(board, guessed);
-                Console.Write("Your guess: (or \"quit\" to end) ");
+                Console.WriteWithGradient("Your guess: (or \"quit\" to end) ", Color.Yellow, Color.Fuchsia, 15);
                 letterChoice = Console.ReadLine().Trim().ToUpper();
                 char letter = letterChoice.ToCharArray()[0];
-                guessed.Add(letter);
+                guessed.Add(letter);               
+
                 if (letterChoice.Length > 0 && letterChoice != "QUIT")
                 {
                     for (int i = 0; i < word.Length; i++)
@@ -37,6 +42,10 @@ namespace Hangman
                         if (letters[i] == letter)
                         {
                             board[i] = letter;
+                        }
+                        else
+                        {
+                            missedLetters++;
                         }
                     }
                 }
@@ -55,16 +64,15 @@ namespace Hangman
         static void DisplayBoard(char[] board, HashSet<char> guessed)
         {
             Console.Clear();
-            Console.WriteLine("Choose a letter");
+            Console.WriteLine("Choose a letter", Color.Aquamarine);
             Console.WriteLine("----------------------------------");
             Console.WriteLine("");
-            Console.WriteLine(String.Join(" ", board));
+            Console.WriteLine(String.Join(" ", board),Color.CornflowerBlue);
             Console.WriteLine("");
-            Console.WriteLine("Guessed letters: ");
+            Console.WriteLine("Guessed letters: ", Color.Yellow);
             Console.WriteLine("");
-            Console.WriteLine(String.Join(" ", guessed));
+            Console.WriteLine(String.Join(" ", guessed),Color.DarkGoldenrod);
             Console.WriteLine("");
-        }
-
+        }      
     }
 }
