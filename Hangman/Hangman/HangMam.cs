@@ -1,4 +1,6 @@
-﻿namespace Hangman
+﻿using System.IO;
+
+namespace Hangman
 {
     using System;
     using System.Collections.Generic;
@@ -8,11 +10,24 @@
     public class HangMam
     {
 
-       public static void Main()
+        public static void Main()
         {
-            
+
             Random r = new Random();
             List<string> words = new List<string>();
+            /* 
+            StreamReader reader = new StreamReader("../../Dictionary/words.txt");
+            string line = reader.ReadLine();
+            while (line != null)
+            {
+                words.Add(line);
+                line = reader.ReadLine();
+            }
+            */
+
+
+
+
             words.Add("Software");
             words.Add("SoftUni");
             words.Add("Technology");
@@ -36,7 +51,7 @@
                 Console.WriteWithGradient("Your guess: (or \"quit\" to end) ", Color.Yellow, Color.Fuchsia, 15);
                 letterChoice = Console.ReadLine().Trim().ToUpper();
                 char letter = letterChoice.ToCharArray()[0];
-                guessed.Add(letter);               
+                guessed.Add(letter);
 
                 if (letterChoice.Length > 0 && letterChoice != "QUIT")
                 {
@@ -61,7 +76,7 @@
                 /* please add player mistake in your code
                  */
                 int playerMistakes = 0;
-                Console.WriteLine($"You won with {0} mistakes",playerMistakes);
+                Console.WriteLine($"You won with {0} mistakes", playerMistakes);
                 if (playerMistakes >= scores.GetLastPositionMistakes())
                 {
                     Console.WriteLine("Your score did not enter in the BestPlayer Scoreboard");
@@ -70,10 +85,10 @@
                 {
                     /*please add player name in your code*/
                     string playerName = "Tanyta";
-                    scores.AddNewScore(playerName,playerMistakes);
+                    scores.AddNewScore(playerName, playerMistakes);
                     scores.PrintScoreBoard();
                 }
-                
+
             }
             else
             {
@@ -87,12 +102,12 @@
             Console.WriteLine("Choose a letter", Color.Aquamarine);
             Console.WriteLine("----------------------------------");
             Console.WriteLine("");
-            Console.WriteLine(String.Join(" ", board),Color.CornflowerBlue);
+            Console.WriteLine(String.Join(" ", board), Color.CornflowerBlue);
             Console.WriteLine("");
             Console.WriteLine("Guessed letters: ", Color.Yellow);
             Console.WriteLine("");
-            Console.WriteLine(String.Join(" ", guessed),Color.DarkGoldenrod);
+            Console.WriteLine(String.Join(" ", guessed), Color.DarkGoldenrod);
             Console.WriteLine("");
-        }      
+        }
     }
 }
