@@ -1,17 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using Console = Colorful.Console;
-using System.Linq;
-using System.Xml.Serialization;
-
-namespace Hangman
+﻿namespace Hangman
 {
-    class Program
+    using System;
+    using System.Collections.Generic;
+    using System.Drawing;
+    using Console = Colorful.Console;
+
+    public class HangMam
     {
 
-        static void Main()
+       public static void Main()
         {
+            
             Random r = new Random();
             List<string> words = new List<string>();
             words.Add("Software");
@@ -26,6 +25,10 @@ namespace Hangman
             HashSet<char> guessed = new HashSet<char>();
 
             string letterChoice = "";
+
+            //add scoreboard class
+            ScoreBoard scores = new ScoreBoard();
+
             while (String.Join("", board) != word && letterChoice != "QUIT")
             {
                 int missedLetters = 0;
@@ -54,6 +57,23 @@ namespace Hangman
             {
                 DisplayBoard(board, guessed);
                 Console.WriteLine("You got my word!");
+
+                /* please add player mistake in your code
+                 */
+                int playerMistakes = 0;
+                Console.WriteLine($"You won with {0} mistakes",playerMistakes);
+                if (playerMistakes >= scores.GetLastPositionMistakes())
+                {
+                    Console.WriteLine("Your score did not enter in the BestPlayer Scoreboard");
+                }
+                else
+                {
+                    /*please add player name in your code*/
+                    string playerName = "Tanyta";
+                    scores.AddNewScore(playerName,playerMistakes);
+                    scores.PrintScoreBoard();
+                }
+                
             }
             else
             {
