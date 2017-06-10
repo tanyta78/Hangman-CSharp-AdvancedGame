@@ -1,15 +1,15 @@
-﻿namespace Hangman
+﻿using Hangman.Utilities;
+
+namespace Hangman
 {
     using System;
 
     public class ScoreBoard
     {
         public const int ScoresCount = 10;
-
         private string[] bestPlayerNames = new string[ScoresCount];
 
         private int[] mistakes = new int[ScoresCount];
-
 
         public ScoreBoard()
         {
@@ -22,30 +22,28 @@
 
         public void PrintScoreBoard()
         {
-            Console.WriteLine("Best hangmam players:");
+            Console.WriteLine(Message.Info.BestPlayersLabel);
             int i = 0;
             while (bestPlayerNames[i] != null)
             {
-                Console.WriteLine(String.Format("{0}. {1,15}===> {2,3} mistakes", i + 1, bestPlayerNames[i], mistakes[i]));
+                Console.WriteLine($"{i + 1}. {bestPlayerNames[i],15} ===> {mistakes[i],3} mistakes");
                 i++;
                 if (i >= bestPlayerNames.Length)
                 {
                     break;
                 }
-
             }
         }
 
         public void AddNewScore(string playerName, int playerMistakes)
         {
             //find correct place index for player's result
-          
 
-          int indexInScoreBoard = FindCorrectIndex(playerMistakes);
+            int indexInScoreBoard = FindCorrectIndex(playerMistakes);
 
             //change scoreList
 
-            if (indexInScoreBoard<bestPlayerNames.Length)
+            if (indexInScoreBoard < bestPlayerNames.Length)
             {
                 for (int index = bestPlayerNames.Length - 1; index > indexInScoreBoard; index--)
                 {
@@ -53,12 +51,9 @@
                     mistakes[index] = mistakes[index - 1];
                 }
 
-
                 bestPlayerNames[indexInScoreBoard] = playerName;
                 mistakes[indexInScoreBoard] = playerMistakes;
             }
-            
-
         }
 
         private int FindCorrectIndex(int playerMistakes)
@@ -71,7 +66,6 @@
                 }
             }
             return bestPlayerNames.Length;
-            
         }
 
         public int GetLastPositionMistakes()
@@ -84,6 +78,5 @@
 
             return worstTopScore;
         }
-
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace Hangman
+﻿using Hangman.Utilities;
+
+namespace Hangman
 {
     using System.Collections.Generic;
     using System.IO;
@@ -22,7 +24,7 @@
             while (true)
             {
                 var word = Console.ReadLine();
-                if (word == "STOP")
+                if (word == Message.Warning.Stop)
                 {
                     break;
                 }
@@ -30,7 +32,7 @@
             }
             File.AppendAllLines(path, words);
 
-            Menu.InitialiseMenu();
+            Menu.Initialize();
         }
     }
 }

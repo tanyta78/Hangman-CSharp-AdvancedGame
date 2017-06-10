@@ -1,8 +1,8 @@
-﻿
-namespace Hangman
+﻿namespace Hangman
 {
     using System;
     using System.Collections.Generic;
+    using Hangman.Utilities;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
@@ -10,7 +10,7 @@ namespace Hangman
 
     public class Menu
     {
-        public static void InitialiseMenu()
+        public static void Initialize()
         {
             MakeChoice();
             ExecuteCommand();
@@ -93,7 +93,7 @@ namespace Hangman
                 case 3:
                     throw new NotImplementedException();
                 case 4:
-                    Console.WriteLine("Thanks for playing :)", System.Drawing.Color.Gold);
+                    Console.WriteLine(Message.Info.ThanksForPlaying, System.Drawing.Color.Gold);
                     break;
                 default:
                     break;

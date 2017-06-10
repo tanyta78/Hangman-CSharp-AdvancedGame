@@ -1,4 +1,6 @@
-﻿namespace Hangman
+﻿using Hangman.Utilities;
+
+namespace Hangman
 {
     using System;
     using System.Collections.Generic;
@@ -18,10 +20,10 @@
 
             if (words.Length == 0)
             {
-                Console.WriteLine("Guessing words file is empty! Can't start a game.", Color.Red);
-                Console.WriteLine("Press any key to go back to the menu", Color.PaleVioletRed);
+                Console.WriteLine(Message.Error.GuessingWordFileEmpty, Color.Red);
+                Console.WriteLine(Message.Info.PressAnyKeyForMenu, Color.PaleVioletRed);
                 Console.ReadKey();
-                Menu.InitialiseMenu();
+                Menu.Initialize();
             }
 
             Random r = new Random();
@@ -83,7 +85,7 @@
                 Console.WriteLine($"You won with {mistakes} mistakes");
                 if (mistakes >= scores.GetLastPositionMistakes())
                 {
-                    Console.WriteLine("Your score did not enter in the BestPlayer Scoreboard");
+                    Console.WriteLine(Message.Info.NotHighScore);
                 }
                 else
                 {
@@ -103,12 +105,12 @@
         private static void DisplayBoard(char[] board, HashSet<char> guessed)
         {
             Console.Clear();
-            Console.WriteLine("Choose a letter", Color.Aquamarine);
+            Console.WriteLine(Message.Info.ChooseLetter, Color.Aquamarine);
             Console.WriteLine("----------------------------------");
             Console.WriteLine("");
             Console.WriteLine(String.Join(" ", board), Color.CornflowerBlue);
             Console.WriteLine("");
-            Console.WriteLine("Already guessed: ", Color.Yellow);
+            Console.WriteLine(Message.Warning.AlreadyGuessed, Color.Yellow);
             Console.WriteLine("");
             Console.WriteLine(String.Join(" ", guessed), Color.Red);
             Console.WriteLine("");
