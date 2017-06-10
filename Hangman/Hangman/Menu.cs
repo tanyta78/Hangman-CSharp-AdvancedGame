@@ -3,13 +3,12 @@
     using System;
     using System.Collections.Generic;
     using Hangman.Utilities;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using Console = Colorful.Console;
 
     public class Menu
     {
+        private static int choice = 1;
+
         public static void Initialize()
         {
             MakeChoice();
@@ -23,8 +22,6 @@
                 "3. View Highscores",
                 "4. Exit"
             };
-
-        private static int choice = 1;
 
         private static void PrintChoices()
         {

@@ -1,9 +1,10 @@
-﻿using Hangman.Utilities;
+﻿using System.Linq;
 
 namespace Hangman
 {
     using System;
     using System.Collections.Generic;
+    using Hangman.Utilities;
     using System.Drawing;
     using System.IO;
     using Console = Colorful.Console;
@@ -12,18 +13,22 @@ namespace Hangman
     {
         public static void StartGame()
         {
-            if (!File.Exists("./../../words.txt"))
+            //string wordsPath = "./../../testwords.txt";
+            string wordsPath = "../../Dictionary/words.txt";
+            if (!File.Exists(wordsPath))
             {
-                File.Create("./../../words.txt");
+                File.Create(wordsPath);
             }
-            var words = File.ReadAllLines("./../../words.txt");
+            var words = File.ReadAllLines(wordsPath).Where(w => w!="").ToArray();
 
             if (words.Length == 0)
             {
                 Console.WriteLine(Message.Error.GuessingWordFileEmpty, Color.Red);
                 Console.WriteLine(Message.Info.PressAnyKeyForMenu, Color.PaleVioletRed);
                 Console.ReadKey();
+
                 Menu.Initialize();
+                return;
             }
 
             Random r = new Random();
@@ -58,8 +63,6 @@ namespace Hangman
                     mistakes++;
                 }
 
-
-
                 if (letterChoice.Length > 0 && letterChoice != "QUIT")
                 {
                     for (int i = 0; i < word.Length; i++)
@@ -75,6 +78,7 @@ namespace Hangman
                     }
                 }
             }
+
             if (letterChoice != "QUIT")
             {
                 DisplayBoard(board, guessed);
@@ -94,7 +98,6 @@ namespace Hangman
                     scores.AddNewScore(playerName, mistakes);
                     scores.PrintScoreBoard();
                 }
-
             }
             else
             {
