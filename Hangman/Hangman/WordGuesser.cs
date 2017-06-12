@@ -15,10 +15,16 @@ namespace Hangman
             Content = new char[length];
         }
 
-        public char this[int subscript]
+        public char this[int index]
         {
-            get => Content[subscript];
-            set => Content[subscript] = value;
+            get
+            {
+                return Content[index];
+            }
+            set
+            {
+                Content[index] = value;
+            }
         }
 
     }
