@@ -19,7 +19,7 @@ namespace Hangman
             {
                 File.Create(wordsPath);
             }
-            var words = File.ReadAllLines(wordsPath).Where(w => w!="").ToArray();
+            var words = File.ReadAllLines(wordsPath).Where(w => w != "").ToArray();
 
             if (words.Length == 0)
             {

@@ -19,8 +19,10 @@
             {
                 "1. Start Game",
                 "2. Add words",
-                "3. View Highscores",
-                "4. Exit"
+                "3. List words",
+                "4. Delete word",
+                "5. View Highscores",
+                "6. Exit"
             };
 
         private static void PrintChoices()
@@ -88,11 +90,15 @@
                     GuessingWordsManager.AddWords();
                     break;
                 case 3:
-                    throw new NotImplementedException();
-                case 4:
-                    Console.WriteLine(Message.Info.ThanksForPlaying, System.Drawing.Color.Gold);
+                    GuessingWordsManager.ListWords();
                     break;
-                default:
+                case 4:
+                    GuessingWordsManager.RemoveWord();
+                    break;
+                case 5:
+                    throw new NotImplementedException();
+                case 6:
+                    Console.WriteLine(Message.Info.ThanksForPlaying, System.Drawing.Color.Gold);
                     break;
             }
         }

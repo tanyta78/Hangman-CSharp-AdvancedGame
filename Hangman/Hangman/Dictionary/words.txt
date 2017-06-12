@@ -451,7 +451,7 @@ effect
 
 egg
 
-ålastic
+ï¿½lastic
 
 electric
 
@@ -1558,7 +1558,6 @@ up
 
 use
 
-value
 
 verse
 
