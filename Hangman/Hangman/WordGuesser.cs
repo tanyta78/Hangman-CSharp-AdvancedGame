@@ -8,13 +8,37 @@ namespace Hangman
 {
     public class WordGuesser
     {
-        public char[] Content { get; set; }
+        private char[] Content { get; set; }
+        private string Word { get; set; }
 
-        public WordGuesser(int length)
+        public WordGuesser(string word)
         {
-            Content = new char[length];
+            Word = word;
+            Content = new char[word.Length];
+
+            //sets default value
+            for (int i = 0; i < word.Length; i++)
+            {
+                Content[i] = '_';
+            }
+
+            ShowMarginalChars();
         }
 
+        //makes 1st and last letters show
+        private void ShowMarginalChars()
+        {
+            char left = Word[0];
+            char right = Word[Word.Length - 1];
+
+            for (int i = 0; i < Word.Length; i++)
+            {
+                if (Word[i] == left || Word[i] == right)
+                {
+                    Content[i] = Word[i];
+                }   
+            }
+        }
         public char this[int index]
         {
             get
@@ -27,5 +51,9 @@ namespace Hangman
             }
         }
 
+        public override string ToString()
+        {
+            return string.Join("",Content);
+        }
     }
 }

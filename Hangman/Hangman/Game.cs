@@ -10,10 +10,15 @@
 
     public class Game
     {
+        private static bool isWon { get; set; }
+
         public static void StartGame()
         {
+            isWon = true;
+
             //string wordsPath = "./../../testwords.txt";
             string wordsPath = "../../Dictionary/words.txt";
+
             if (!File.Exists(wordsPath))
             {
                 File.Create(wordsPath);
@@ -33,89 +38,56 @@
             Random r = new Random();
 
             string word = words[r.Next(words.Length)].ToUpper();
-            char[] letters = word.ToCharArray();
-            char[] board = new string('_', word.Length).ToCharArray();
-
-            //the first and the last letters always show up
-            board[0] = word[0];
-            board[word.Length - 1] = word[word.Length - 1];
+            WordGuesser guesser = new WordGuesser(word);
 
             HashSet<char> guessed = new HashSet<char>();
 
-            string letterChoice = "";
+            ConsoleKeyInfo letterChoice = new ConsoleKeyInfo();
 
-            //add scoreboard class
+            //TODO: see this shit
             ScoreBoard scores = new ScoreBoard();
 
             var mistakes = 0;
-            while (String.Join("", board) != word && letterChoice != "QUIT")
-            {
-                int missedLetters = 0;
-                DisplayBoard(board, guessed);
-                Console.WriteWithGradient("Your guess: (or \"quit\" to end) ", Color.Yellow, Color.Fuchsia, 15);
-                letterChoice = Console.ReadLine().Trim().ToUpper();
-                char letter = letterChoice.ToCharArray()[0];
 
-                if (!word.Contains(letter.ToString()))
+            while (guesser.ToString() != word && mistakes <= Constants.AllowedMistakes)
+            {
+                DisplayWordGuesser(guesser, guessed);
+
+                Console.WriteWithGradient("Your guess: (or \"Escape\" to end) ", Color.Yellow, Color.Fuchsia, 15);
+                letterChoice = Console.ReadKey();
+                if (letterChoice.Key == ConsoleKey.Escape)
+                {
+                    //TODO: "Are you sure" prompt
+                    break;
+                }
+                char letter = letterChoice.KeyChar;
+
+                if (!word.Contains(letter) && !guessed.Contains(letter))
                 {
                     guessed.Add(letter);
                     mistakes++;
-                }
-
-                if (letterChoice.Length > 0 && letterChoice != "QUIT")
-                {
-                    for (int i = 0; i < word.Length; i++)
+                    if (mistakes > Constants.AllowedMistakes)
                     {
-                        if (letters[i] == letter)
-                        {
-                            board[i] = letter;
-                        }
-                        else
-                        {
-                            missedLetters++;
-                        }
+                        isWon = false;
+                        break;
                     }
                 }
             }
-
-            if (letterChoice != "QUIT")
-            {
-                DisplayBoard(board, guessed);
-                Console.WriteLine("You got my word!");
-
-                /* please add player mistake in your code
-                 */
-                Console.WriteLine($"You won with {mistakes} mistakes");
-                if (mistakes >= scores.GetLastPositionMistakes())
-                {
-                    Console.WriteLine(Message.NotHighScore);
-                }
-                else
-                {
-                    /*please add player name in your code*/
-                    string playerName = "Tanyta";
-                    scores.AddNewScore(playerName, mistakes);
-                    scores.PrintScoreBoard();
-                }
-            }
-            else
-            {
-                Console.WriteLine("Maybe next time!");
-            }
+                
         }
 
-        private static void DisplayBoard(char[] board, HashSet<char> guessed)
+        private static void DisplayWordGuesser(WordGuesser guesser, HashSet<char> guessed)
         {
             Console.Clear();
             Console.WriteLine(Message.ChooseLetter, Color.Aquamarine);
             Console.WriteLine("----------------------------------");
-            Console.WriteLine("");
-            Console.WriteLine(String.Join(" ", board), Color.CornflowerBlue);
-            Console.WriteLine("");
+            Console.WriteLine();
+            Console.WriteLine(guesser.ToString(), Color.CornflowerBlue);
+            Console.WriteLine();
             Console.WriteLine(Message.AlreadyGuessed, Color.Yellow);
-            Console.WriteLine("");
+            Console.WriteLine();
             Console.WriteLine(String.Join(" ", guessed), Color.Red);
-            Console.WriteLine("");
+            Console.WriteLine();
         }
     }
 }
