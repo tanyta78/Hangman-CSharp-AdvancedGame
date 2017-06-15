@@ -22,7 +22,7 @@ namespace Hangman
 
         public void PrintScoreBoard()
         {
-            Console.WriteLine(Message.Info.BestPlayersLabel);
+            Console.WriteLine(Message.BestPlayersLabel);
             int i = 0;
             while (bestPlayerNames[i] != null)
             {

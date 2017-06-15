@@ -85,7 +85,7 @@
             {2, GuessingWordsManager.AddWords },
             {3, GuessingWordsManager.ListWords },
             {4, GuessingWordsManager.RemoveWord },
-            {6, () => Console.WriteLine(Message.Info.ThanksForPlaying, System.Drawing.Color.Gold) }
+            {6, () => Console.WriteLine(Message.ThanksForPlaying, System.Drawing.Color.Gold) }
         };
 
         private static void ExecuteCommand()

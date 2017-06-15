@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26430.6
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hangman", "Hangman\Hangman.csproj", "{30A5F184-E72E-42FA-BEB7-ECE832AFE881}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hangman.Utilities", "Hangman.Utilities\Hangman.Utilities.csproj", "{5CF450D4-E057-4355-B3FD-0AE8E034B51F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "Database\Database.csproj", "{D5CAB293-969B-4D23-802E-75A2F974FE04}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{5CF450D4-E057-4355-B3FD-0AE8E034B51F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5CF450D4-E057-4355-B3FD-0AE8E034B51F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5CF450D4-E057-4355-B3FD-0AE8E034B51F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5CAB293-969B-4D23-802E-75A2F974FE04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5CAB293-969B-4D23-802E-75A2F974FE04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5CAB293-969B-4D23-802E-75A2F974FE04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5CAB293-969B-4D23-802E-75A2F974FE04}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
