@@ -17,12 +17,12 @@
 
         private static List<string> choices = new List<string>()
             {
-                "1. Start Game",
-                "2. Add words",
-                "3. List words",
-                "4. Delete word",
-                "5. View Highscores",
-                "6. Exit"
+                "Start Game",
+                "Add words",
+                "List words",
+                "Delete word",
+                "View Highscores",
+                "Exit"
             };
 
         private static void PrintChoices()
@@ -32,11 +32,11 @@
             {
                 if (choice != i + 1)
                 {
-                    Console.WriteLine($"{choices[i]}", System.Drawing.Color.GhostWhite);
+                    Console.WriteLine($"{i + 1}. {choices[i]}", System.Drawing.Color.GhostWhite);
                 }
                 else
                 {
-                    Console.WriteLine($">> {choices[i]} <<", System.Drawing.Color.Lime);
+                    Console.WriteLine($">> {i + 1}. {choices[i]} <<", System.Drawing.Color.Lime);
                 }
             }
         }
@@ -79,30 +79,23 @@
             }
         }
 
+        private static Dictionary<int, Action> Commands = new Dictionary<int, Action>()
+        {
+            {1, Game.StartGame },
+            {2, GuessingWordsManager.AddWords },
+            {3, GuessingWordsManager.ListWords },
+            {4, GuessingWordsManager.RemoveWord },
+            {6, () => Console.WriteLine(Message.Info.ThanksForPlaying, System.Drawing.Color.Gold) }
+        };
+
         private static void ExecuteCommand()
         {
-            switch (choice)
+            if (!Commands.ContainsKey(choice))
             {
-                case 1:
-                    Game.StartGame();
-                    break;
-                case 2:
-                    GuessingWordsManager.AddWords();
-                    break;
-                case 3:
-                    GuessingWordsManager.ListWords();
-                    break;
-                case 4:
-                    GuessingWordsManager.RemoveWord();
-                    break;
-                case 5:
-                    throw new NotImplementedException();
-                case 6:
-                    Console.WriteLine(Message.Info.ThanksForPlaying, System.Drawing.Color.Gold);
-                    break;
+                throw new NotImplementedException();
             }
+
+            Commands[choice]();
         }
-
-
     }
 }
