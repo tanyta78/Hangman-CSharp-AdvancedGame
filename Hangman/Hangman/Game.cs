@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace Hangman
+﻿namespace Hangman
 {
     using System;
     using System.Collections.Generic;
@@ -8,6 +6,7 @@ namespace Hangman
     using System.Drawing;
     using System.IO;
     using Console = Colorful.Console;
+    using System.Linq;
 
     public class Game
     {
@@ -23,8 +22,8 @@ namespace Hangman
 
             if (words.Length == 0)
             {
-                Console.WriteLine(Message.Error.GuessingWordFileEmpty, Color.Red);
-                Console.WriteLine(Message.Info.PressAnyKeyForMenu, Color.PaleVioletRed);
+                Console.WriteLine(Message.GuessingWordFileEmpty, Color.Red);
+                Console.WriteLine(Message.PressAnyKeyForMenu, Color.PaleVioletRed);
                 Console.ReadKey();
 
                 Menu.Initialize();
@@ -89,7 +88,7 @@ namespace Hangman
                 Console.WriteLine($"You won with {mistakes} mistakes");
                 if (mistakes >= scores.GetLastPositionMistakes())
                 {
-                    Console.WriteLine(Message.Info.NotHighScore);
+                    Console.WriteLine(Message.NotHighScore);
                 }
                 else
                 {
@@ -108,12 +107,12 @@ namespace Hangman
         private static void DisplayBoard(char[] board, HashSet<char> guessed)
         {
             Console.Clear();
-            Console.WriteLine(Message.Info.ChooseLetter, Color.Aquamarine);
+            Console.WriteLine(Message.ChooseLetter, Color.Aquamarine);
             Console.WriteLine("----------------------------------");
             Console.WriteLine("");
             Console.WriteLine(String.Join(" ", board), Color.CornflowerBlue);
             Console.WriteLine("");
-            Console.WriteLine(Message.Warning.AlreadyGuessed, Color.Yellow);
+            Console.WriteLine(Message.AlreadyGuessed, Color.Yellow);
             Console.WriteLine("");
             Console.WriteLine(String.Join(" ", guessed), Color.Red);
             Console.WriteLine("");

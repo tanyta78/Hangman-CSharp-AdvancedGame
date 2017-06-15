@@ -1,17 +1,17 @@
-﻿using Hangman.Utilities;
-
-namespace Hangman
-{
-    using System.Collections.Generic;
+﻿    using System.Collections.Generic;
     using System.Drawing;
     using System.IO;
     using System.Linq;
+    using Hangman.Utilities;
     using Console = Colorful.Console;
+
+namespace Hangman
+{
+    
 
     public class GuessingWordsManager
     {
         private const string wordsPath = "../../Dictionary/words.txt";
-
         public static void AddWords()
         {
             if (!File.Exists(wordsPath))
@@ -26,7 +26,7 @@ namespace Hangman
             while (true)
             {
                 var word = Console.ReadLine();
-                if (word == Message.Warning.Stop)
+                if (word == Message.Stop)
                 {
                     break;
                 }
@@ -53,7 +53,7 @@ namespace Hangman
             {
                 Console.WriteLine("The word is not contained in the list!", Color.Red);
             }
-            Console.WriteLine(Message.Info.PressAnyKeyForMenu, Color.LightSteelBlue);
+            Console.WriteLine(Message.PressAnyKeyForMenu, Color.LightSteelBlue);
 
             Menu.Initialize();
         }
@@ -69,7 +69,7 @@ namespace Hangman
                 Console.WriteLine(group.Key, Color.Red);
                 Console.WriteLine($"[{string.Join(", ", group.ToList().OrderBy(w => w))}]", Color.DarkOrchid);
             }
-            Console.WriteLine(Message.Info.PressAnyKeyForMenu, Color.LightSteelBlue);
+            Console.WriteLine(Message.PressAnyKeyForMenu, Color.LightSteelBlue);
             Console.ReadKey();
 
             Menu.Initialize();

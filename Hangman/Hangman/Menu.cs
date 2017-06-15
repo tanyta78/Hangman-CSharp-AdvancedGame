@@ -9,22 +9,28 @@
     {
         private static int choice = 1;
 
+        private static List<string> choices = new List<string>()
+        {
+            "1. Start Game",
+            "2. Add words",
+            "3. List words",
+            "4. Delete word",
+            "5. View Highscores",
+            "6. Logout"
+        };
+
+        private static List<string> logInMenu = new List<string>()
+        {
+            "1. New player",
+            "2. Log in",
+            "3. View Highscores",
+            "4. Exit"
+        };
         public static void Initialize()
         {
             MakeChoice();
             ExecuteCommand();
         }
-
-        private static List<string> choices = new List<string>()
-            {
-                "1. Start Game",
-                "2. Add words",
-                "3. List words",
-                "4. Delete word",
-                "5. View Highscores",
-                "6. Exit"
-            };
-
         private static void PrintChoices()
         {
             Console.Clear();
@@ -98,7 +104,7 @@
                 case 5:
                     throw new NotImplementedException();
                 case 6:
-                    Console.WriteLine(Message.Info.ThanksForPlaying, System.Drawing.Color.Gold);
+                    Console.WriteLine(Message.ThanksForPlaying, System.Drawing.Color.Gold);
                     break;
             }
         }
