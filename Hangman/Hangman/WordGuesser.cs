@@ -55,5 +55,20 @@ namespace Hangman
         {
             return string.Join("",Content);
         }
+
+        public void Update(char c)
+        {
+            if (!Word.Contains(c))
+            {
+                return;
+            }
+            for (int i = 0; i < Content.Length; i++)
+            {
+                if (Word[i] == c)
+                {
+                    Content[i] = c;
+                }  
+            }
+        }
     }
 }

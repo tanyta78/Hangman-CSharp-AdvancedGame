@@ -51,7 +51,7 @@
 
             while (guesser.ToString() != word && mistakes <= Constants.AllowedMistakes)
             {
-                DisplayWordGuesser(guesser, guessed);
+                DisplayWordGuesser(guesser, guessed,word);
 
                 Console.WriteWithGradient("Your guess: (or \"Escape\" to end) ", Color.Yellow, Color.Fuchsia, 15);
                 letterChoice = Console.ReadKey();
@@ -60,7 +60,7 @@
                     //TODO: "Are you sure" prompt
                     break;
                 }
-                char letter = letterChoice.KeyChar;
+                char letter = letterChoice.KeyChar.ToString().ToUpper().First();
 
                 if (!word.Contains(letter) && !guessed.Contains(letter))
                 {
@@ -72,15 +72,17 @@
                         break;
                     }
                 }
+
+                guesser.Update(letter);
             }
-                
+            DisplayResult(mistakes);
         }
 
-        private static void DisplayWordGuesser(WordGuesser guesser, HashSet<char> guessed)
+        private static void DisplayWordGuesser(WordGuesser guesser, HashSet<char> guessed,string word)
         {
             Console.Clear();
             Console.WriteLine(Message.ChooseLetter, Color.Aquamarine);
-            Console.WriteLine("----------------------------------");
+            Console.WriteLine("----------------------------------" + word);
             Console.WriteLine();
             Console.WriteLine(guesser.ToString(), Color.CornflowerBlue);
             Console.WriteLine();
@@ -89,5 +91,19 @@
             Console.WriteLine(String.Join(" ", guessed), Color.Red);
             Console.WriteLine();
         }
+
+        private static void DisplayResult(int mistakes)
+        {
+            if (isWon)
+            {
+                Console.WriteLine("You got my word!");
+                Console.WriteLine($"You won with {mistakes} mistakes");
+            }
+            else
+            {
+                Console.WriteLine("Maybe next time");
+            }
+        }
+
     }
 }

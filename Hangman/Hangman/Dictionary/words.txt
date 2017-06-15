@@ -1,1663 +1,1663 @@
-able
+ABLE
 
-about
+ABOUT
 
-account
+ACCOUNT
 
-acid
+ACID
 
-across
+ACROSS
 
-act
+ACT
 
-addition
+ADDITION
 
-adjustment
+ADJUSTMENT
 
-advertisement
+ADVERTISEMENT
 
-after
+AFTER
 
-again
+AGAIN
 
-against
+AGAINST
 
-agreement
+AGREEMENT
 
-air
+AIR
 
-all
+ALL
 
-almost
+ALMOST
 
-among
+AMONG
 
-amount
+AMOUNT
 
-amusement
+AMUSEMENT
 
-and
+AND
 
-angle
+ANGLE
 
-angry
+ANGRY
 
-animal
+ANIMAL
 
-answer
+ANSWER
 
-ant
+ANT
 
-any
+ANY
 
-apparatus
+APPARATUS
 
-apple
+APPLE
 
-approval
+APPROVAL
 
-arch
-argument
+ARCH
+ARGUMENT
 
-arm
+ARM
 
-army
+ARMY
 
-art
+ART
 
-as
+AS
 
-at
+AT
 
-attack
+ATTACK
 
-attempt
+ATTEMPT
 
-attention
+ATTENTION
 
-attraction
+ATTRACTION
 
-authority
+AUTHORITY
 
-automatic
+AUTOMATIC
 
-awake
+AWAKE
 
-baby
+BABY
 
-back
+BACK
 
-bad
+BAD
 
-bag
+BAG
 
-balance
+BALANCE
 
-ball
+BALL
 
-band
+BAND
 
-base
+BASE
 
-basin
+BASIN
 
-basket
+BASKET
 
-bath
+BATH
 
-be
+BE
 
-beautiful
+BEAUTIFUL
 
-because
+BECAUSE
 
-bed
+BED
 
-bee
+BEE
 
-before
+BEFORE
 
-behaviour
+BEHAVIOUR
 
-belief
+BELIEF
 
-bell
+BELL
 
-bent
+BENT
 
-berry
+BERRY
 
-between
+BETWEEN
 
-bird
+BIRD
 
-birth
+BIRTH
 
-bit
+BIT
 
-bite
+BITE
 
-bitter
+BITTER
 
-black
+BLACK
 
-blade
+BLADE
 
-blood
+BLOOD
 
-blow
+BLOW
 
-blue
+BLUE
 
-board
+BOARD
 
-boat
+BOAT
 
-body
+BODY
 
-boiling
+BOILING
 
-bone
+BONE
 
-book
+BOOK
 
-boot
+BOOT
 
-bottle
+BOTTLE
 
-box
+BOX
 
-boy
+BOY
 
-brain
+BRAIN
 
-brake
+BRAKE
 
-branch
+BRANCH
 
-brass
+BRASS
 
-bread
+BREAD
 
-breath
+BREATH
 
-brick
+BRICK
 
-bridge
+BRIDGE
 
-bright
+BRIGHT
 
-broken
+BROKEN
 
-brother
+BROTHER
 
-brown
+BROWN
 
-brush
+BRUSH
 
-bucket
+BUCKET
 
-building
+BUILDING
 
-bulb
+BULB
 
-burn
+BURN
 
-burst
+BURST
 
-business
+BUSINESS
 
-but
+BUT
 
-butter
+BUTTER
 
-button
+BUTTON
 
-by
+BY
 
-cake
+CAKE
 
-camera
+CAMERA
 
-canvas
+CANVAS
 
-card
+CARD
 
-care
+CARE
 
-carriage
+CARRIAGE
 
-cart
+CART
 
-cat
+CAT
 
-cause
+CAUSE
 
-certain
+CERTAIN
 
-chain
+CHAIN
 
-chalk
+CHALK
 
-chance
+CHANCE
 
-change
+CHANGE
 
-cheap
+CHEAP
 
-cheese
+CHEESE
 
-chemical
+CHEMICAL
 
-chest
+CHEST
 
-chief
-chin
+CHIEF
+CHIN
 
-church
+CHURCH
 
-circle
+CIRCLE
 
-clean
+CLEAN
 
-clear
+CLEAR
 
-clock
+CLOCK
 
-cloth
+CLOTH
 
-cloud
+CLOUD
 
-coal
+COAL
 
-coat
+COAT
 
-cold
+COLD
 
-collar
+COLLAR
 
-colour
+COLOUR
 
-comb
+COMB
 
-come
+COME
 
-comfort
+COMFORT
 
-committee
+COMMITTEE
 
-common
+COMMON
 
-company
+COMPANY
 
-comparison
+COMPARISON
 
-competition
+COMPETITION
 
-complete
+COMPLETE
 
-complex
+COMPLEX
 
-condition
+CONDITION
 
-connection
+CONNECTION
 
-conscious
+CONSCIOUS
 
-control
+CONTROL
 
-cook
+COOK
 
-copper
+COPPER
 
-copy
+COPY
 
-cord
+CORD
 
-cork
+CORK
 
-cotton
+COTTON
 
-cough
+COUGH
 
-country
+COUNTRY
 
-cover
+COVER
 
-cow
+COW
 
-crack
+CRACK
 
-credit
+CREDIT
 
-crime
+CRIME
 
-cruel
+CRUEL
 
-crush
+CRUSH
 
-cry
+CRY
 
-cup
+CUP
 
-cup
+CUP
 
-current
+CURRENT
 
-curtain
-curve
+CURTAIN
+CURVE
 
-cushion
+CUSHION
 
-damage
+DAMAGE
 
-danger
+DANGER
 
-dark
+DARK
 
-daughter
+DAUGHTER
 
-day
+DAY
 
-dead
+DEAD
 
-dear
+DEAR
 
-death
+DEATH
 
-debt
+DEBT
 
-decision
+DECISION
 
-deep
+DEEP
 
-degree
+DEGREE
 
-delicate
+DELICATE
 
-dependent
+DEPENDENT
 
-design
+DESIGN
 
-desire
+DESIRE
 
-destruction
+DESTRUCTION
 
-detail
+DETAIL
 
-development
+DEVELOPMENT
 
-different
+DIFFERENT
 
-digestion
+DIGESTION
 
-direction
+DIRECTION
 
-dirty
+DIRTY
 
-discovery
+DISCOVERY
 
-discussion
+DISCUSSION
 
-disease
+DISEASE
 
-disgust
+DISGUST
 
-distance
+DISTANCE
 
-distribution
+DISTRIBUTION
 
-division
+DIVISION
 
-do
+DO
 
-dog
+DOG
 
-door
+DOOR
 
-doubt
+DOUBT
 
-down
+DOWN
 
-drain
+DRAIN
 
-drawer
+DRAWER
 
-dress
+DRESS
 
-drink
+DRINK
 
-driving
+DRIVING
 
-drop
+DROP
 
-dry
+DRY
 
-dust
+DUST
 
-ear
+EAR
 
-early
+EARLY
 
-earth
+EARTH
 
-east
+EAST
 
-edge
+EDGE
 
-education
+EDUCATION
 
-effect
+EFFECT
 
-egg
+EGG
 
-�lastic
+�LASTIC
 
-electric
+ELECTRIC
 
-end
+END
 
-engine
+ENGINE
 
-enough
+ENOUGH
 
-equal
+EQUAL
 
-error
+ERROR
 
-even
+EVEN
 
-event
+EVENT
 
-ever
-every
+EVER
+EVERY
 
-example
+EXAMPLE
 
-exchange
+EXCHANGE
 
-existence
+EXISTENCE
 
-expansion
+EXPANSION
 
-experience
+EXPERIENCE
 
-expert
+EXPERT
 
-eye
+EYE
 
-face
+FACE
 
-fact
+FACT
 
-fall
+FALL
 
-false
+FALSE
 
-family
+FAMILY
 
-far
+FAR
 
-farm
+FARM
 
-fat
+FAT
 
-father
+FATHER
 
-fear
+FEAR
 
-feather
+FEATHER
 
-feeble
+FEEBLE
 
-feeling
+FEELING
 
-female
+FEMALE
 
-fertile
+FERTILE
 
-fiction
+FICTION
 
-field
+FIELD
 
-fight
-finger
+FIGHT
+FINGER
 
-fire
+FIRE
 
-first
+FIRST
 
-fish
+FISH
 
-fixed
+FIXED
 
-flag
+FLAG
 
-flame
+FLAME
 
-flat
+FLAT
 
-flight
+FLIGHT
 
-floor
+FLOOR
 
-flower
+FLOWER
 
-fly
+FLY
 
-fold
+FOLD
 
-food
+FOOD
 
-foolish
+FOOLISH
 
-foot
+FOOT
 
-for
+FOR
 
-force
+FORCE
 
-fork
+FORK
 
-form
+FORM
 
-forward
+FORWARD
 
-fowl
+FOWL
 
-frame
+FRAME
 
-free
+FREE
 
-frequent
+FREQUENT
 
-friend
+FRIEND
 
-from
+FROM
 
-front
+FRONT
 
-fruit
+FRUIT
 
-full
+FULL
 
-future
+FUTURE
 
-garden
+GARDEN
 
-general
+GENERAL
 
-get
+GET
 
-girl
+GIRL
 
-give
+GIVE
 
-glass
+GLASS
 
-glove
+GLOVE
 
-go
+GO
 
-goat
+GOAT
 
-gold
+GOLD
 
-good
+GOOD
 
-government
+GOVERNMENT
 
-grain
-grass
+GRAIN
+GRASS
 
-great
+GREAT
 
-green
+GREEN
 
-grey
+GREY
 
-grip
+GRIP
 
-group
+GROUP
 
-growth
+GROWTH
 
-guide
+GUIDE
 
-gun
+GUN
 
-hair
+HAIR
 
-hammer
+HAMMER
 
-hand
+HAND
 
-hanging
+HANGING
 
-happy
+HAPPY
 
-harbour
+HARBOUR
 
-hard
+HARD
 
-harmony
+HARMONY
 
-hat
+HAT
 
-hate
+HATE
 
-have
+HAVE
 
-he
+HE
 
-head
+HEAD
 
-healthy
+HEALTHY
 
-hear
+HEAR
 
-hearing
+HEARING
 
-heart
+HEART
 
-heat
+HEAT
 
-help
+HELP
 
-high
+HIGH
 
-history
+HISTORY
 
-hole
+HOLE
 
-hollow
+HOLLOW
 
-hook
+HOOK
 
-hope
+HOPE
 
-horn
+HORN
 
-horse
+HORSE
 
-hospital
+HOSPITAL
 
-hour
+HOUR
 
-house
+HOUSE
 
-how
+HOW
 
-humour
+HUMOUR
 
 I
 
-ice
+ICE
 
-idea
+IDEA
 
-if
-ill
+IF
+ILL
 
-important
+IMPORTANT
 
-impulse
+IMPULSE
 
-in
+IN
 
-increase
+INCREASE
 
-industry
+INDUSTRY
 
-ink
+INK
 
-insect
+INSECT
 
-instrument
+INSTRUMENT
 
-insurance
+INSURANCE
 
-interest
+INTEREST
 
-invention
+INVENTION
 
-iron
+IRON
 
-island
+ISLAND
 
-jelly
+JELLY
 
-jewel
+JEWEL
 
-join
+JOIN
 
-journey
+JOURNEY
 
-judge
+JUDGE
 
-jump
+JUMP
 
-keep
+KEEP
 
-kettle
+KETTLE
 
-key
+KEY
 
-kick
+KICK
 
-kind
-kiss
+KIND
+KISS
 
-knee
+KNEE
 
-knife
+KNIFE
 
-knot
+KNOT
 
-know
-ledge
+KNOW
+LEDGE
 
-land
+LAND
 
-language
-last
+LANGUAGE
+LAST
 
-late
+LATE
 
-laugh
+LAUGH
 
-law
+LAW
 
-lead
+LEAD
 
-leaf
+LEAF
 
-learning
+LEARNING
 
-leather
+LEATHER
 
-left
+LEFT
 
-leg
+LEG
 
-let
+LET
 
-letter
+LETTER
 
-level
+LEVEL
 
-library
-lift
+LIBRARY
+LIFT
 
-light
+LIGHT
 
-like
+LIKE
 
-limit
+LIMIT
 
-line
+LINE
 
-linen
+LINEN
 
-lip
+LIP
 
-liquid
+LIQUID
 
-list
+LIST
 
-little
+LITTLE
 
-living
+LIVING
 
-lock
+LOCK
 
-long
+LONG
 
-look
+LOOK
 
-loose
+LOOSE
 
-loss
+LOSS
 
-loud
+LOUD
 
-love
+LOVE
 
-low
+LOW
 
-machine
+MACHINE
 
-make
+MAKE
 
-male
+MALE
 
-man
+MAN
 
-manager
+MANAGER
 
-map
+MAP
 
-mark
+MARK
 
-market
+MARKET
 
-married
+MARRIED
 
-mass
+MASS
 
-match
+MATCH
 
-material
+MATERIAL
 
-may
+MAY
 
-meal
+MEAL
 
-measure
-meat
+MEASURE
+MEAT
 
-medical
+MEDICAL
 
-meeting
+MEETING
 
-memory
+MEMORY
 
-metal
+METAL
 
-middle
+MIDDLE
 
-military
+MILITARY
 
-milk
+MILK
 
-mind
+MIND
 
-mine
+MINE
 
-minute
+MINUTE
 
-mist
+MIST
 
-mixed
+MIXED
 
-money
+MONEY
 
-monkey
+MONKEY
 
-month
+MONTH
 
-moon
+MOON
 
-morning
+MORNING
 
-mother
+MOTHER
 
-motion
+MOTION
 
-mountain
+MOUNTAIN
 
-mouth
+MOUTH
 
-move
+MOVE
 
-much
+MUCH
 
-muscle
+MUSCLE
 
-music
+MUSIC
 
-nail
+NAIL
 
-name
+NAME
 
-narrow
+NARROW
 
-nation
+NATION
 
-natural
-near
+NATURAL
+NEAR
 
-necessary
+NECESSARY
 
-neck
+NECK
 
-need
+NEED
 
-needle
-nerve
+NEEDLE
+NERVE
 
-net
+NET
 
-new
+NEW
 
-news
+NEWS
 
-night
+NIGHT
 
-no
+NO
 
-noise
+NOISE
 
-normal
+NORMAL
 
-north
+NORTH
 
-nose
+NOSE
 
-not
-note
+NOT
+NOTE
 
-now
+NOW
 
-number
+NUMBER
 
-nut
+NUT
 
-observation
+OBSERVATION
 
-of
+OF
 
-off
+OFF
 
-offer
+OFFER
 
-office
+OFFICE
 
-oil
+OIL
 
-old
+OLD
 
-on
+ON
 
-only
+ONLY
 
-open
+OPEN
 
-opertion
+OPERTION
 
-opinion
+OPINION
 
-opposite
+OPPOSITE
 
-or
+OR
 
-orange
+ORANGE
 
-order
+ORDER
 
-organization
+ORGANIZATION
 
-ornament
+ORNAMENT
 
-other
+OTHER
 
-out
+OUT
 
-oven
+OVEN
 
-over
+OVER
 
-owner
+OWNER
 
-page
+PAGE
 
-pain
+PAIN
 
-paint
+PAINT
 
-paper
+PAPER
 
-parallel
+PARALLEL
 
-parcel
+PARCEL
 
-part
+PART
 
-past
+PAST
 
-paste
+PASTE
 
-payment
+PAYMENT
 
-peace
+PEACE
 
-pen
-pencil
+PEN
+PENCIL
 
-person
+PERSON
 
-physical
+PHYSICAL
 
-picture
+PICTURE
 
-pig
+PIG
 
-pin
+PIN
 
-pipe
-place
-plane
+PIPE
+PLACE
+PLANE
 
-plant
+PLANT
 
-plate
+PLATE
 
-play
+PLAY
 
-please
+PLEASE
 
-pleasure
+PLEASURE
 
-plough
+PLOUGH
 
-pocket
+POCKET
 
-point
+POINT
 
-poison
+POISON
 
-polish
+POLISH
 
-political
+POLITICAL
 
-poor
+POOR
 
-porter
+PORTER
 
-position
+POSITION
 
-possible
+POSSIBLE
 
-pot
+POT
 
-potato
+POTATO
 
-powder
+POWDER
 
-power
+POWER
 
-present
+PRESENT
 
-price
+PRICE
 
-print
+PRINT
 
-prison
+PRISON
 
-private
+PRIVATE
 
-probable
+PROBABLE
 
-process
-produce
+PROCESS
+PRODUCE
 
-profit
+PROFIT
 
-property
+PROPERTY
 
-prose
+PROSE
 
-protest
+PROTEST
 
-public
+PUBLIC
 
-pull
+PULL
 
-pump
+PUMP
 
-punishment
+PUNISHMENT
 
-purpose
+PURPOSE
 
-push
+PUSH
 
-put
+PUT
 
-quality
+QUALITY
 
-question
+QUESTION
 
-quick
+QUICK
 
-quiet
+QUIET
 
-quite
+QUITE
 
-rail
+RAIL
 
-rain
+RAIN
 
-range
+RANGE
 
-rat
+RAT
 
-rate
+RATE
 
-ray
+RAY
 
-reaction
+REACTION
 
-reading
+READING
 
-ready
+READY
 
-reason
+REASON
 
-receipt
+RECEIPT
 
-record
+RECORD
 
-red
+RED
 
-regret
+REGRET
 
-regular
+REGULAR
 
-relation
+RELATION
 
-religion
+RELIGION
 
-representative
+REPRESENTATIVE
 
-request
+REQUEST
 
-respect
+RESPECT
 
-responsible
+RESPONSIBLE
 
-rest
+REST
 
-reward
+REWARD
 
-rhythm
+RHYTHM
 
-rice
+RICE
 
-right
+RIGHT
 
-ring
+RING
 
-river
+RIVER
 
-road
+ROAD
 
-rod
+ROD
 
-roll
+ROLL
 
-roof
+ROOF
 
-room
+ROOM
 
-root
+ROOT
 
-rough
+ROUGH
 
-round
+ROUND
 
-rub
+RUB
 
-rule
+RULE
 
-run
+RUN
 
-sad
+SAD
 
-safe
+SAFE
 
-sail
+SAIL
 
-salt
+SALT
 
-same
+SAME
 
-sand
+SAND
 
-say
+SAY
 
-scale
+SCALE
 
-school
+SCHOOL
 
-science
+SCIENCE
 
-scissors
+SCISSORS
 
-screw
+SCREW
 
-sea
+SEA
 
-seat
+SEAT
 
-second
+SECOND
 
-secret
+SECRET
 
-secretary
+SECRETARY
 
-see
+SEE
 
-seed
+SEED
 
-seem
+SEEM
 
-selection
+SELECTION
 
-self
+SELF
 
-send
+SEND
 
-sense
+SENSE
 
-separate
+SEPARATE
 
-serious
+SERIOUS
 
-servant
+SERVANT
 
-sex
+SEX
 
-shade
+SHADE
 
-shake
+SHAKE
 
-shame
+SHAME
 
-sharp
+SHARP
 
-sheep
+SHEEP
 
-shelf
+SHELF
 
-ship
+SHIP
 
-shirt
+SHIRT
 
-shock
+SHOCK
 
-shoe
+SHOE
 
-short
+SHORT
 
-shut
+SHUT
 
-side
+SIDE
 
-sign
+SIGN
 
-silk
+SILK
 
-silver
+SILVER
 
-simple
+SIMPLE
 
-sister
+SISTER
 
-size
+SIZE
 
-skin
+SKIN
 
 
-skirt
+SKIRT
 
-sky
+SKY
 
-sleep
+SLEEP
 
-slip
+SLIP
 
-slope
+SLOPE
 
-slow
+SLOW
 
-small
+SMALL
 
-smash
+SMASH
 
-smell
+SMELL
 
-smile
+SMILE
 
-smoke
-smooth
+SMOKE
+SMOOTH
 
-snake
+SNAKE
 
-sneeze
+SNEEZE
 
-snow
+SNOW
 
-so
+SO
 
-soap
+SOAP
 
-society
+SOCIETY
 
-sock
+SOCK
 
-soft
+SOFT
 
-solid
+SOLID
 
-some
+SOME
 
 
-son
+SON
 
-song
+SONG
 
-sort
+SORT
 
-sound
+SOUND
 
-soup
+SOUP
 
-south
+SOUTH
 
-space
+SPACE
 
-spade
+SPADE
 
-special
+SPECIAL
 
-sponge
+SPONGE
 
-spoon
+SPOON
 
-spring
+SPRING
 
-square
+SQUARE
 
-stage
+STAGE
 
-stamp
+STAMP
 
-star
+STAR
 
-start
+START
 
-statement
+STATEMENT
 
-station
+STATION
 
-steam
+STEAM
 
-steel
+STEEL
 
-stem
+STEM
 
-step
+STEP
 
-stick
+STICK
 
-sticky
-stiff
+STICKY
+STIFF
 
-still
+STILL
 
-stitch
+STITCH
 
-stocking
+STOCKING
 
-stomach
+STOMACH
 
-stone
+STONE
 
-stop
+STOP
 
-store
+STORE
 
-story
+STORY
 
-straight
+STRAIGHT
 
-strange
+STRANGE
 
-street
+STREET
 
-stretch
+STRETCH
 
-strong
+STRONG
 
-structure
+STRUCTURE
 
-substance
+SUBSTANCE
 
-such
-sudden
+SUCH
+SUDDEN
 
-sugar
+SUGAR
 
-suggestion
-summer
+SUGGESTION
+SUMMER
 
-sun
+SUN
 
-support
+SUPPORT
 
-surprise
+SURPRISE
 
-sweet
+SWEET
 
-swim
+SWIM
 
-system
+SYSTEM
 
-table
+TABLE
 
-tail
+TAIL
 
-take
+TAKE
 
-talk
+TALK
 
-tall
+TALL
 
-taste
+TASTE
 
-tax
+TAX
 
-teaching
+TEACHING
 
-tendency
+TENDENCY
 
-test
+TEST
 
-than
+THAN
 
-that
-the
+THAT
+THE
 
-then
+THEN
 
-theory
+THEORY
 
-there
+THERE
 
-thick
+THICK
 
-thin
+THIN
 
-thing
+THING
 
-this
+THIS
 
-thought
+THOUGHT
 
-thread
+THREAD
 
-throat
+THROAT
 
-through
+THROUGH
 
-through
+THROUGH
 
-thumb
+THUMB
 
-thunder
+THUNDER
 
-ticket
+TICKET
 
-tight
+TIGHT
 
-till
+TILL
 
-time
+TIME
 
-tin
+TIN
 
-tired
+TIRED
 
-to
+TO
 
-toe
+TOE
 
-together
+TOGETHER
 
-tomorrow
+TOMORROW
 
-tongue
+TONGUE
 
-tooth
+TOOTH
 
-top
+TOP
 
-touch
+TOUCH
 
-town
+TOWN
 
-trade
+TRADE
 
-train
+TRAIN
 
-transport
+TRANSPORT
 
-tray
+TRAY
 
-tree
+TREE
 
-trick
+TRICK
 
-trouble
+TROUBLE
 
-trousers
+TROUSERS
 
-true
+TRUE
 
-turn
+TURN
 
-twist
+TWIST
 
-umbrella
+UMBRELLA
 
-under
+UNDER
 
-unit
+UNIT
 
-up
+UP
 
-use
+USE
 
 
-verse
+VERSE
 
-very
+VERY
 
-vessel
+VESSEL
 
-view
+VIEW
 
-violent
+VIOLENT
 
-voice
+VOICE
 
-waiting
+WAITING
 
-walk
+WALK
 
-wall
+WALL
 
-war
+WAR
 
-warm
+WARM
 
-wash
+WASH
 
-waste
+WASTE
 
-watch
-water
+WATCH
+WATER
 
-wave
+WAVE
 
-wax
+WAX
 
-way
+WAY
 
-weather
+WEATHER
 
-week
+WEEK
 
-weight
+WEIGHT
 
-well
+WELL
 
-west
+WEST
 
-wet
+WET
 
-wheel
+WHEEL
 
-when
+WHEN
 
-where
+WHERE
 
-while
+WHILE
 
-whip
+WHIP
 
-whistle
+WHISTLE
 
-white
+WHITE
 
-who
-why
+WHO
+WHY
 
-wide
+WIDE
 
-will
+WILL
 
-wind
+WIND
 
-window
+WINDOW
 
-wine
+WINE
 
-wing
+WING
 
-winter
+WINTER
 
-wire
+WIRE
 
-wise
+WISE
 
-with
+WITH
 
-woman
+WOMAN
 
-wood
+WOOD
 
-wool
+WOOL
 
-word
+WORD
 
-work
+WORK
 
-worm
+WORM
 
-wound
+WOUND
 
-writing
+WRITING
 
-wrong
+WRONG
 
