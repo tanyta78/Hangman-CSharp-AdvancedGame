@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Game.cs" />
+    <Compile Include="GibbetDrawing.cs" />
     <Compile Include="GuessingWordsManager.cs" />
     <Compile Include="HangmanDbContext.cs" />
     <Compile Include="Migrations\201706150650192_Initial.cs" />

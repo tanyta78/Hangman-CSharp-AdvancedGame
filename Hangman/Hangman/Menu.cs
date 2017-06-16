@@ -12,6 +12,8 @@
 
         public static void Initialize()
         {
+            Mode.Set(GameMode.Menu);
+
             MakeChoice();
             ExecuteCommand();
         }
