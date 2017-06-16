@@ -45,8 +45,10 @@
 
             ConsoleKeyInfo letterChoice = new ConsoleKeyInfo();
 
-            //TODO: see this
             ScoreBoard scores = new ScoreBoard();
+
+            //TODO: fix hardcoding this
+            GibbetDrawing gibbet = new GibbetDrawing(0,11+15);
 
             var mistakes = 0;
 
@@ -73,6 +75,7 @@
                         isWon = false;
                         break;
                     }
+                    gibbet.Update();
                 }
 
                 guesser.Update(letter);

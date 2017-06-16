@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -16,20 +17,11 @@ namespace Hangman
 
         private int mistakes { get; set; }
 
-        public GibbetDrawing(int x, int y)
+        public GibbetDrawing(int x, int bottomY)
         {
             startX = x;
-            startY = y;
+            startY = bottomY;
             mistakes = 0;
-
-            Part1();
-            Part2();
-            Part3();
-            Part4();
-            Part5();
-            Part6();
-            Part7();
-            Part8();
 
             Console.SetCursorPosition(startY, startX + 1);
         }
@@ -38,9 +30,13 @@ namespace Hangman
         public void Update()
         {
             mistakes++;
+
+            //methodInfo is null
+            MethodInfo methodInfo = this.GetType().GetMethod("Part" + mistakes, BindingFlags.NonPublic | BindingFlags.Instance);
+            methodInfo.Invoke(this,null);
         }
 
-        private void Part1()
+        private static void Part1()
         {
             Console.SetCursorPosition(startY, startX - 1);
 
@@ -48,8 +44,9 @@ namespace Hangman
             Console.WriteLine(new string('x', 14));
         }
 
-        private void Part2()
+        private static void Part2()
         {
+            Part1();
             Console.SetCursorPosition(startY, startX - 14);
 
             for (int i = 0; i < 13; i++)
@@ -58,8 +55,9 @@ namespace Hangman
             }
         }
 
-        private void Part3()
+        private static void Part3()
         {
+            Part2();
             Console.SetCursorPosition(startY + 7, startX - 14);
 
             for (int i = 0; i < 9; i++)
@@ -68,8 +66,9 @@ namespace Hangman
             }
         }
 
-        private void Part4()
+        private static void Part4()
         {
+            Part3();
             for (int i = 0; i < 2; i++)
             {
                 Console.SetCursorPosition(22, startX - 14 + i + 1);
@@ -77,8 +76,9 @@ namespace Hangman
             }
         }
 
-        private void Part5()
+        private static void Part5()
         {
+            Part4();
             Console.SetCursorPosition(21, startX - 14 + 3);
 
             Console.WriteLine("o o");
@@ -88,8 +88,10 @@ namespace Hangman
             Console.WriteLine("o");
         }
 
-        private void Part6()
+        private static void Part6()
         {
+            Part5();
+
             for (int i = 0; i < 3; i++)
             {
                 Console.SetCursorPosition(22, startX - 14 + 6 + i);
@@ -105,16 +107,18 @@ namespace Hangman
             }
         }
 
-        private void Part7()
+        private static void Part7()
         {
+            Part6();
+
             Console.SetCursorPosition(20, startX - 14 + 6);
             Console.Write(@"\ + /");
         }
 
-        //TODO
-
-        private void Part8()
+        private static void Part8()
         {
+            Part7();
+
             int spaces = 1;
             for (int i = 0; i < 2; i++)
             {
