@@ -14,6 +14,7 @@
 
         public static void StartGame()
         {
+            Mode.Set(GameMode.Game);
             isWon = true;
 
             //string wordsPath = "./../../testwords.txt";
@@ -44,7 +45,7 @@
 
             ConsoleKeyInfo letterChoice = new ConsoleKeyInfo();
 
-            //TODO: see this shit
+            //TODO: see this
             ScoreBoard scores = new ScoreBoard();
 
             var mistakes = 0;
@@ -58,6 +59,7 @@
                 if (letterChoice.Key == ConsoleKey.Escape)
                 {
                     //TODO: "Are you sure" prompt
+                    Menu.Initialize();
                     break;
                 }
                 char letter = letterChoice.KeyChar.ToString().ToUpper().First();
@@ -75,7 +77,7 @@
 
                 guesser.Update(letter);
             }
-            DisplayResult(mistakes);
+            DisplayResult(mistakes,word);
         }
 
         private static void DisplayWordGuesser(WordGuesser guesser, HashSet<char> guessed,string word)
@@ -92,7 +94,7 @@
             Console.WriteLine();
         }
 
-        private static void DisplayResult(int mistakes)
+        private static void DisplayResult(int mistakes,string word)
         {
             if (isWon)
             {
@@ -102,6 +104,7 @@
             else
             {
                 Console.WriteLine("Maybe next time");
+                Console.WriteLine($"Your word was {word}");
             }
         }
 

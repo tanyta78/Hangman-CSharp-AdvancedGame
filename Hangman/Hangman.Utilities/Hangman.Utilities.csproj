@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Constants.cs" />
     <Compile Include="Message.cs" />
+    <Compile Include="Mode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
