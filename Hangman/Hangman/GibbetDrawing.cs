@@ -26,6 +26,10 @@ namespace Hangman
             Part2();
             Part3();
             Part4();
+            Part5();
+            Part6();
+            Part7();
+            Part8();
 
             Console.SetCursorPosition(startY, startX + 1);
         }
@@ -75,17 +79,49 @@ namespace Hangman
 
         private void Part5()
         {
-            Console.SetCursorPosition(23, 3);
+            Console.SetCursorPosition(21, startX - 14 + 3);
 
-            for (int i = 0; i < 2; i++)
-            {
-                Console.Write("|");
-            }
+            Console.WriteLine("o o");
+            Console.SetCursorPosition(20, startX - 14 + 4);
+            Console.WriteLine("o. .o");
+            Console.SetCursorPosition(22, startX - 14 + 5);
+            Console.WriteLine("o");
         }
 
         private void Part6()
         {
-            Console.SetCursorPosition(22, 6);
+            for (int i = 0; i < 3; i++)
+            {
+                Console.SetCursorPosition(22, startX - 14 + 6 + i);
+                if (i == 1)
+                {
+                    Console.SetCursorPosition(21, startX - 14 + 6 + i);
+                    Console.WriteLine("+++");
+                }
+                else
+                {
+                    Console.WriteLine("+");
+                }
+            }
+        }
+
+        private void Part7()
+        {
+            Console.SetCursorPosition(20, startX - 14 + 6);
+            Console.Write(@"\ + /");
+        }
+
+        //TODO
+
+        private void Part8()
+        {
+            int spaces = 1;
+            for (int i = 0; i < 2; i++)
+            {
+                Console.SetCursorPosition(21 - i, startX - 14 + 9 + i);
+                Console.WriteLine($@"/{new string(' ', spaces)}\");
+                spaces += 2;
+            }
         }
     }
 }
