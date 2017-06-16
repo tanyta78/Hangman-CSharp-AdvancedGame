@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hangman.Cheats
+namespace Hangman.Test
 {
-    public class Cheats
+    class Program
     {
-        public static void ShowWord(WordGuesser guesser)
+        static void Main(string[] args)
         {
-            
+            var gibbet = new GibbetDrawing(30, 0);
+
         }
     }
 }
