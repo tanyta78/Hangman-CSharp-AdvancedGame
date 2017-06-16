@@ -4,14 +4,16 @@
     using System.Collections.Generic;
     using Hangman.Utilities;
     using Console = Colorful.Console;
+    using System.Threading;
 
     public class Menu
     {
         public static int choice = 1;
-        public static bool loggedIN = false;
 
         public static void Initialize()
         {
+            UserManager.TryReadUserFromFile();
+
             Mode.Set(GameMode.Menu);
 
             MakeChoice();
@@ -39,6 +41,16 @@
         private static void PrintChoices(List<string> choices)
         {
             Console.Clear();
+
+            if (SessionData.LoggedIn)
+            {
+                Console.WriteLine($"Hello {SessionData.CurrentUser} :)", System.Drawing.Color.Green);
+            }
+            else
+            {
+                Console.WriteLine($"not logged in.", System.Drawing.Color.Red);
+            }
+            System.Console.WriteLine();
             for (int i = 0; i < choices.Count; i++)
             {
                 if (choice != i + 1)
@@ -56,14 +68,13 @@
         {
             while (true)
             {
-                if (loggedIN)
+                var currentChoices = choices;
+                if (!SessionData.LoggedIn)
                 {
-                     PrintChoices(choices);
+                    currentChoices = loggerChoices;
                 }
-                else
-                {
-                   PrintChoices(loggerChoices);
-                }
+
+                PrintChoices(currentChoices);
                 
                 var pressedKey = Console.ReadKey().Key;
                 if (pressedKey == ConsoleKey.Enter)
@@ -75,7 +86,7 @@
                     case ConsoleKey.UpArrow:
                         if (choice == 1)
                         {
-                            choice = choices.Count;
+                            choice = currentChoices.Count;
                         }
                         else
                         {
@@ -83,7 +94,7 @@
                         }
                         break;
                     case ConsoleKey.DownArrow:
-                        if (choice == choices.Count)
+                        if (choice == currentChoices.Count)
                         {
                             choice = 1;
                         }
@@ -101,10 +112,10 @@
         {
             {1, UserManager.RegisterUser },
             {2, UserManager.LogIn },
-            {3, GuessingWordsManager.ListWords },
-            {4, GuessingWordsManager.RemoveWord },
-            {5, () => Console.WriteLine(Message.ThanksForPlaying, System.Drawing.Color.Gold) }
+            {3, GuessingWordsManager.ShowHighScores },
+            {4, () => Console.WriteLine(Message.ThanksForPlaying, System.Drawing.Color.Gold) }
         };
+
         private static Dictionary<int, Action> Commands = new Dictionary<int, Action>()
         {
             {1, Game.StartGame },
@@ -121,7 +132,7 @@
             {
                 throw new NotImplementedException();
             }
-            if (loggedIN)
+            if (SessionData.LoggedIn)
             {
                 Commands[choice]();
             }

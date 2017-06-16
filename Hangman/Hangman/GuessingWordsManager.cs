@@ -1,15 +1,16 @@
-﻿    using System.Collections.Generic;
-    using System.Drawing;
-    using System.IO;
-    using System.Linq;
-    using System.Runtime.CompilerServices;
-    using Database;
-    using Hangman.Utilities;
-    using Console = Colorful.Console;
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using Database;
+using Hangman.Utilities;
+using Console = Colorful.Console;
 
 namespace Hangman
 {
-    
+
 
     public class GuessingWordsManager
     {
@@ -40,11 +41,11 @@ namespace Hangman
             }
             foreach (var word in words)
             {
-                if (word.Length<=5)
+                if (word.Length <= 5)
                 {
                     level = 1;
                 }
-                else if (word.Length>5&& word.Length<=10)
+                else if (word.Length > 5 && word.Length <= 10)
                 {
                     level = 2;
                 }
@@ -56,7 +57,7 @@ namespace Hangman
                 {
                     level = 4;
                 }
-                else if (word.Length>20)
+                else if (word.Length > 20)
                 {
                     level = 5;
                 }
@@ -65,7 +66,7 @@ namespace Hangman
                     Name = word,
                     Level = level
                 };
-                var isInDB =  dbContext.Words.Where(x => x.Name.ToLower() == word).ToList().Count;
+                var isInDB = dbContext.Words.Where(x => x.Name.ToLower() == word).ToList().Count;
                 if (isInDB > 0)
                 {
                     Console.WriteLine("{0} is already available", word, Color.Red);
@@ -75,7 +76,7 @@ namespace Hangman
                     dbContext.Words.Add(wordToAdd);
                     dbContext.SaveChanges();
                 }
-                
+
             }
             Menu.Initialize();
         }
@@ -88,9 +89,9 @@ namespace Hangman
 
             var wordToRemove = dbContext.Words.Where(x => x.Name == word).FirstOrDefault<Words>();
             //Console.WriteLine(wordToRemove.Name);
-            if (wordToRemove==null)
-            {     
-                Console.WriteLine("The word is not contained in the list!", Color.Red);                     
+            if (wordToRemove == null)
+            {
+                Console.WriteLine("The word is not contained in the list!", Color.Red);
             }
             else
             {
@@ -119,6 +120,11 @@ namespace Hangman
             Console.ReadKey();
 
             Menu.Initialize();
+        }
+
+        public static void ShowHighScores()
+        {
+            throw new NotImplementedException();
         }
     }
 }
