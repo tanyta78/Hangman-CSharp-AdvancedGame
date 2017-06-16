@@ -9,8 +9,8 @@ namespace Hangman
             : base("HangmanDb")
         {
         }
-        public DbSet<Users> Users { get; set; }
+        public virtual DbSet<Users> Users { get; set; }
 
-        public DbSet<Words> Words { get; set; }
+        public virtual DbSet<Words> Words { get; set; }
     }
 }

@@ -7,7 +7,8 @@
 
     public class Menu
     {
-        private static int choice = 1;
+        public static int choice = 1;
+        public static bool loggedIN = false;
 
         public static void Initialize()
         {
@@ -15,17 +16,25 @@
             ExecuteCommand();
         }
 
-        private static List<string> choices = new List<string>()
+        public static List<string> choices = new List<string>()
             {
                 "Start Game",
                 "Add words",
                 "List words",
                 "Delete word",
                 "View Highscores",
+                "Logout",
                 "Exit"
             };
+        public static List<string> loggerChoices = new List<string>()
+        {
+            "New player",
+            "Log in",
+            "View Highscores",
+            "Exit"
+        };
 
-        private static void PrintChoices()
+        private static void PrintChoices(List<string> choices)
         {
             Console.Clear();
             for (int i = 0; i < choices.Count; i++)
@@ -41,11 +50,19 @@
             }
         }
 
-        private static void MakeChoice()
+        public static void MakeChoice()
         {
             while (true)
             {
-                PrintChoices();
+                if (loggedIN)
+                {
+                     PrintChoices(choices);
+                }
+                else
+                {
+                   PrintChoices(loggerChoices);
+                }
+                
                 var pressedKey = Console.ReadKey().Key;
                 if (pressedKey == ConsoleKey.Enter)
                 {
@@ -78,14 +95,22 @@
                 }
             }
         }
-
+        private static Dictionary<int, Action> LogerCommands = new Dictionary<int, Action>()
+        {
+            {1, UserManager.RegisterUser },
+            {2, UserManager.LogIn },
+            {3, GuessingWordsManager.ListWords },
+            {4, GuessingWordsManager.RemoveWord },
+            {5, () => Console.WriteLine(Message.ThanksForPlaying, System.Drawing.Color.Gold) }
+        };
         private static Dictionary<int, Action> Commands = new Dictionary<int, Action>()
         {
             {1, Game.StartGame },
             {2, GuessingWordsManager.AddWords },
             {3, GuessingWordsManager.ListWords },
             {4, GuessingWordsManager.RemoveWord },
-            {6, () => Console.WriteLine(Message.ThanksForPlaying, System.Drawing.Color.Gold) }
+            {6, UserManager.LogOut },
+            {7, () => Console.WriteLine(Message.ThanksForPlaying, System.Drawing.Color.Gold) }
         };
 
         private static void ExecuteCommand()
@@ -94,8 +119,15 @@
             {
                 throw new NotImplementedException();
             }
-
-            Commands[choice]();
+            if (loggedIN)
+            {
+                Commands[choice]();
+            }
+            else
+            {
+                LogerCommands[choice]();                
+            }
+            
         }
     }
 }
