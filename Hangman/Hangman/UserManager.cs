@@ -7,6 +7,19 @@ namespace Hangman
 {
     public static class UserManager
     {
+
+        public static void TryReadUserFromFile()
+        {
+            if (!SessionData.LoggedIn)
+            {
+                SessionData.ReadUserData();
+                if (SessionData.LoggedIn)
+                {
+                    UserManager.CurrentUser = SessionData.CurrentUser;
+                }
+            }
+        }
+
         private static string currentUser = "";
         private static HangmanContext dbContext = new HangmanContext();
 
@@ -14,13 +27,17 @@ namespace Hangman
         {
             get
             {
-                return currentUser;                
-            } 
+                return currentUser;
+            }
+            set
+            {
+                currentUser = value;
+            }
         }
 
         public static void RegisterUser()
-        {      
-            Console.WriteLine("Please input a username:",Color.Aquamarine);
+        {
+            Console.WriteLine("Please input a username:", Color.Aquamarine);
             var name = Console.ReadLine();
             var users = dbContext.Users.Where(x => x.Name.ToLower() == name.ToLower()).ToList();
             if (users.Count == 0)
@@ -37,7 +54,7 @@ namespace Hangman
                 dbContext.Users.Add(newUser);
                 dbContext.SaveChanges();
                 currentUser = name;
-                Menu.loggedIN = true;
+                SessionData.WriteUserData(name, password);
                 Menu.Initialize();
             }
             else
@@ -69,7 +86,7 @@ namespace Hangman
                 else
                 {
                     currentUser = users[0].Name;
-                    Menu.loggedIN = true;
+                    SessionData.WriteUserData(name, password);
                     Menu.choice = 1;
                     Menu.Initialize();
                 }
@@ -80,8 +97,9 @@ namespace Hangman
         public static void LogOut()
         {
             currentUser = "";
-            Menu.loggedIN = false;
+            SessionData.LogOut();
             Menu.choice = 1;
+            SessionData.LogOut();
             Menu.Initialize();
         }
 
