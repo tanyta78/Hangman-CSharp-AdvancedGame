@@ -21,10 +21,16 @@ namespace Hangman
         {
             startX = x;
             startY = bottomY;
+            Location = new[] {startX, startY};
+
             mistakes = 0;
             Console.SetCursorPosition(startX, startY);
-           
         }
+
+        /// <summary>
+        /// 0 element is startX, 1st element is startY
+        /// </summary>
+        public int[] Location { get; }
 
         //Increments mistakes to visualize next part
         public void Update()
@@ -39,7 +45,8 @@ namespace Hangman
                 return;
             }
             //methodInfo is null
-            MethodInfo methodInfo = GetType().GetMethod("Part" + mistakes, BindingFlags.NonPublic | BindingFlags.Static);
+            MethodInfo methodInfo = GetType()
+                .GetMethod("Part" + mistakes, BindingFlags.NonPublic | BindingFlags.Static);
             methodInfo.Invoke(this, null);
         }
 

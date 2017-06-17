@@ -57,6 +57,7 @@
                 //display word guesser clears whole console => gibbet too
                 DisplayWordGuesser(guesser, guessed,word, gibbet);
 
+                Console.SetCursorPosition(gibbet.Location[0],gibbet.Location[1] + 2);
                 Console.WriteWithGradient("Your guess: (or \"Escape\" to end) ", Color.Yellow, Color.Fuchsia, 15);
                 letterChoice = Console.ReadKey();
                 if (letterChoice.Key == ConsoleKey.Escape)
