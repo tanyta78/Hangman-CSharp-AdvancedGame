@@ -69,10 +69,6 @@
     <Compile Include="Migrations\201706150956351_Constraints.Designer.cs">
       <DependentUpon>201706150956351_Constraints.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201706161854130_Change words Length constrain.cs" />
-    <Compile Include="Migrations\201706161854130_Change words Length constrain.Designer.cs">
-      <DependentUpon>201706161854130_Change words Length constrain.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Menu.cs" />
