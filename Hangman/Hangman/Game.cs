@@ -54,7 +54,8 @@
 
             while (guesser.ToString() != word && mistakes <= Constants.AllowedMistakes)
             {
-                DisplayWordGuesser(guesser, guessed,word);
+                //display word guesser clears whole console => gibbet too
+                DisplayWordGuesser(guesser, guessed,word, gibbet);
 
                 Console.WriteWithGradient("Your guess: (or \"Escape\" to end) ", Color.Yellow, Color.Fuchsia, 15);
                 letterChoice = Console.ReadKey();
@@ -83,7 +84,7 @@
             DisplayResult(mistakes,word);
         }
 
-        private static void DisplayWordGuesser(WordGuesser guesser, HashSet<char> guessed,string word)
+        private static void DisplayWordGuesser(WordGuesser guesser, HashSet<char> guessed,string word,GibbetDrawing gibbet)
         {
             Console.Clear();
             Console.WriteLine(Message.ChooseLetter, Color.Aquamarine);
@@ -95,6 +96,8 @@
             Console.WriteLine();
             Console.WriteLine(String.Join(" ", guessed), Color.Red);
             Console.WriteLine();
+            gibbet.Print();
+
         }
 
         private static void DisplayResult(int mistakes,string word)

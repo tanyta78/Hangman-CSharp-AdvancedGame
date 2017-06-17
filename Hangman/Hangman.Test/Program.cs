@@ -10,7 +10,7 @@ namespace Hangman.Test
     {
         static void Main(string[] args)
         {
-            var gibbet = new GibbetDrawing(30, 0);
+            var gibbet = new GibbetDrawing(0, 30);
 
         }
     }
