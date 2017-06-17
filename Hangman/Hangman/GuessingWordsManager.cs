@@ -87,7 +87,6 @@ namespace Hangman
             var word = Console.ReadLine().ToLower();
 
             var wordToRemove = dbContext.Words.Where(x => x.Name == word).FirstOrDefault<Words>();
-            //Console.WriteLine(wordToRemove.Name);
             if (wordToRemove==null)
             {     
                 Console.WriteLine("The word is not contained in the list!", Color.Red);                     
@@ -107,7 +106,6 @@ namespace Hangman
         {
             Console.Clear();
             var list = dbContext.Words.Select(x => x.Name).ToList();
-            //var words = File.ReadAllLines(wordsPath);
             var groupedWords = list.Where(w => !string.IsNullOrWhiteSpace(w)).GroupBy(w => w[0]).OrderBy(g => g.Key);
 
             foreach (var group in groupedWords)

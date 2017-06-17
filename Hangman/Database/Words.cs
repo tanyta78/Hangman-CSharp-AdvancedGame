@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Database
 {
@@ -8,7 +9,7 @@ namespace Database
         public int Id { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [StringLength(Int32.MaxValue)]
         public string Name { get; set; }
 
         [Required]
