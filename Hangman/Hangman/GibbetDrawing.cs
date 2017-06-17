@@ -56,6 +56,7 @@ namespace Hangman
 
             Console.WriteLine(new string('x', 14));
             Console.WriteLine(new string('x', 14));
+            Console.WriteLine();
         }
 
         private static void Part2()
