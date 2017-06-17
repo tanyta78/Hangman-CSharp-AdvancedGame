@@ -11,19 +11,22 @@
     public class Game
     {
         private static bool isWon { get; set; }
+        private static int mistakes { get; set; }
+        private static string word { get; set; }
 
         public static void StartGame()
         {
             Mode.Set(GameMode.Game);
             isWon = true;
+            mistakes = 0;
 
-            //string wordsPath = "./../../testwords.txt";
             string wordsPath = "../../Dictionary/words.txt";
 
             if (!File.Exists(wordsPath))
             {
                 File.Create(wordsPath);
             }
+
             var words = File.ReadAllLines(wordsPath).Where(w => w != "").ToArray();
 
             if (words.Length == 0)
@@ -36,30 +39,34 @@
                 return;
             }
 
-            Random r = new Random();
-
-            string word = words[r.Next(words.Length)].ToUpper();
-            WordGuesser guesser = new WordGuesser(word);
-
-            HashSet<char> guessed = new HashSet<char>();
-
-            ConsoleKeyInfo letterChoice = new ConsoleKeyInfo();
+           
 
             ScoreBoard scores = new ScoreBoard();
 
-            //TODO: fix hardcoding this
-            GibbetDrawing gibbet = new GibbetDrawing(0,11+15);
+            PlayGame(words);
+            DisplayResult();
+        }
 
-            var mistakes = 0;
+        private static void PlayGame(string[] words)
+        {
+            Random r = new Random();
+
+            word = words[r.Next(words.Length)].ToUpper();
+            WordGuesser guesser = new WordGuesser(word);
+            HashSet<char> guessed = new HashSet<char>();
+
+            //TODO: fix hardcoding this
+            GibbetDrawing gibbet = new GibbetDrawing(0, 11 + 15);
 
             while (guesser.ToString() != word && mistakes <= Constants.AllowedMistakes)
             {
                 //display word guesser clears whole console => gibbet too
-                DisplayWordGuesser(guesser, guessed,word, gibbet);
+                DrawGame(guesser, guessed, word, gibbet);
 
-                Console.SetCursorPosition(gibbet.Location[0],gibbet.Location[1] + 2);
+                Console.SetCursorPosition(gibbet.Location[0], gibbet.Location[1] + 2);
                 Console.WriteWithGradient("Your guess: (or \"Escape\" to end) ", Color.Yellow, Color.Fuchsia, 15);
-                letterChoice = Console.ReadKey();
+                ConsoleKeyInfo letterChoice = Console.ReadKey();
+
                 if (letterChoice.Key == ConsoleKey.Escape)
                 {
                     //TODO: "Are you sure" prompt
@@ -82,10 +89,8 @@
 
                 guesser.Update(letter);
             }
-            DisplayResult(mistakes,word);
         }
-
-        private static void DisplayWordGuesser(WordGuesser guesser, HashSet<char> guessed,string word,GibbetDrawing gibbet)
+        private static void DrawGame(WordGuesser guesser, HashSet<char> guessed,string word,GibbetDrawing gibbet)
         {
             Console.Clear();
             Console.WriteLine(Message.ChooseLetter, Color.Aquamarine);
@@ -100,8 +105,7 @@
             gibbet.Print();
 
         }
-
-        private static void DisplayResult(int mistakes,string word)
+        private static void DisplayResult()
         {
             if (isWon)
             {
