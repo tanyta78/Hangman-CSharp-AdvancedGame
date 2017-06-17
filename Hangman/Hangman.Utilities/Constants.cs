@@ -12,7 +12,10 @@ namespace Hangman.Utilities
 
         public static int ConsoleMenuWidth = 60;
         public static int ConsoleMenuHeight = 15;
+
         public static int ConsoleGameWidth = 60;
         public static int ConsoleGameHeight = 50;
+
+        public static int ConsoleDictionaryWidth = 80;
     }
 }

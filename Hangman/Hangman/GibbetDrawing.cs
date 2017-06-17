@@ -28,7 +28,7 @@ namespace Hangman
         }
 
         /// <summary>
-        /// 0 element is startX, 1st element is startY
+        /// 0 element is startX (bottom left column), 1st element is startY (row)
         /// </summary>
         public int[] Location { get; }
 

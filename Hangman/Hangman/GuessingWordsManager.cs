@@ -1,44 +1,61 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading;
+using System.Windows.Forms;
 using Database;
 using Hangman.Utilities;
 using Console = Colorful.Console;
+using Message = Hangman.Utilities.Message;
 
 namespace Hangman
 {
-
-
     public class GuessingWordsManager
     {
-        private const string wordsPath = "../../Dictionary/words.txt";
+//        private const string wordsPath = "../../Dictionary/words.txt";
         private static HangmanContext dbContext = new HangmanContext();
 
         public static void AddWords()
         {
+            Console.Clear();
+            Console.WriteLine("Enter a word to add or STOP to go back");
+
+            OpenFileDialog ofd = new OpenFileDialog();
+
+            string wordsPath = "";
+            var t = new Thread((ThreadStart) (() =>
+            {
+                OpenFileDialog fbd = new OpenFileDialog();
+                ofd.Filter = "TXT|*.txt";
+
+                if (ofd.ShowDialog() == DialogResult.Cancel)
+                    return;
+                else
+                {
+                    wordsPath = ofd.FileName;
+                }
+            }));
+
+            t.SetApartmentState(ApartmentState.STA);
+            t.Start();
+            t.Join();
+            Console.WriteLine(wordsPath);
+
+
             if (!File.Exists(wordsPath))
             {
                 File.Create(wordsPath);
             }
 
-            Console.Clear();
-            Console.WriteLine("Enter a word to add or STOP to go back");
-
             int level = 0;
-            var words = new List<string>();
+            var words = File.ReadAllLines(wordsPath).Where(w => w != "").ToList();
 
-            while (true)
-            {
-                var word = Console.ReadLine().ToLower();
-                if (word == Message.Stop.ToLower())
-                {
-                    break;
-                }
-                words.Add(word);
-            }
+            var wordsToAdd = new List<Words>();
+
             foreach (var word in words)
             {
                 if (word.Length <= 5)
@@ -61,23 +78,28 @@ namespace Hangman
                 {
                     level = 5;
                 }
+
                 var wordToAdd = new Words()
                 {
                     Name = word,
                     Level = level
                 };
-                var isInDB = dbContext.Words.Where(x => x.Name.ToLower() == word).ToList().Count;
-                if (isInDB > 0)
+
+                var isInDB = dbContext.Words.Any(x => x.Name.ToLower() == word);
+
+                if (isInDB)
                 {
                     Console.WriteLine("{0} is already available", word, Color.Red);
                 }
                 else
                 {
-                    dbContext.Words.Add(wordToAdd);
-                    dbContext.SaveChanges();
+                    wordsToAdd.Add(wordToAdd);
                 }
-
             }
+
+            dbContext.Words.AddOrUpdate(wordsToAdd.ToArray());
+            dbContext.SaveChanges();
+
             Menu.Initialize();
         }
 
@@ -107,6 +129,8 @@ namespace Hangman
         public static void ListWords()
         {
             Console.Clear();
+            Mode.Set(GameMode.Dictionary);
+
             var list = dbContext.Words.Select(x => x.Name).ToList();
             //var words = File.ReadAllLines(wordsPath);
             var groupedWords = list.Where(w => !string.IsNullOrWhiteSpace(w)).GroupBy(w => w[0]).OrderBy(g => g.Key);
