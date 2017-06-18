@@ -4,7 +4,6 @@ using Hangman.Utilities;
 using System.Drawing;
 using System.Linq;
 
-
 namespace Hangman
 {
     using System;

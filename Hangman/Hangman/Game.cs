@@ -26,26 +26,27 @@ namespace Hangman
             Mode.Set(GameMode.Game);
             isWon = true;
 
-            while (gameLevel<6&&isWon == true)
+            while (gameLevel < 6 && isWon == true)
             {
-                
+
                 mistakes = 0;
                 var words = dbContext.Words.Where(x => x.Level == gameLevel).Select(x => x.Name).ToArray();
                 PlayGame(words);
-                ScoreBoard score = new ScoreBoard(gameLevel,mistakes);
-                          
+                ScoreBoard score = new ScoreBoard(gameLevel, mistakes);
+
                 gameLevel++;
             }
             if (isWon)
             {
-                 DisplayResult();
+                DisplayResult();
             }
-            if (player.Score<finalScore)
+            if (player.Score < finalScore)
             {
                 player.Score = finalScore;
                 dbContext.SaveChanges();
             }
 
+            gameLevel = 1;
             Console.WriteLine("Press any key to go back to the menu.");
             Console.ReadKey();
 
@@ -101,14 +102,14 @@ namespace Hangman
             currentScore = ScoreBoard.GetScore();
             finalScore += currentScore;
         }
-        private static void DrawGame(WordGuesser guesser, HashSet<char> guessed,string word,GibbetDrawing gibbet)
+        private static void DrawGame(WordGuesser guesser, HashSet<char> guessed, string word, GibbetDrawing gibbet)
         {
             Console.Clear();
             Console.WriteLine("----------------------------------", Color.Aquamarine);
-            Console.WriteLine($"Player:{player.Name}  --  Best score:{player.Score:F0}",Color.Khaki);
+            Console.WriteLine($"Player:{player.Name}  --  Best score:{player.Score:F0}", Color.Khaki);
             Console.WriteLine("----------------------------------", Color.Aquamarine);
-            Console.WriteLine($"Current level:{gameLevel}    {Message.ChooseLetter}",Color.Khaki);
-            Console.WriteLine("----------------------------------" ,Color.Aquamarine);
+            Console.WriteLine($"Current level:{gameLevel}    {Message.ChooseLetter}", Color.Khaki);
+            Console.WriteLine("----------------------------------", Color.Aquamarine);
             Console.WriteLine();
             Console.WriteLine(guesser.ToString(), Color.CornflowerBlue);
             Console.WriteLine();
@@ -124,13 +125,13 @@ namespace Hangman
             if (isWon)
             {
                 Console.WriteLine("You got my word!");
-                Console.WriteLine($"You won with -> Score:{finalScore:F0}",Color.GreenYellow);
+                Console.WriteLine($"You won with -> Score:{finalScore:F0}", Color.GreenYellow);
                 ScoreBoard.AddNewScore(player, mistakes);
             }
             else
             {
                 Console.WriteLine("Maybe next time");
-                Console.WriteLine($"Your word was {word}, Score:{finalScore:F0}",Color.Aqua);
+                Console.WriteLine($"Your word was {word}, Score:{finalScore:F0}", Color.Aqua);
             }
         }
 
