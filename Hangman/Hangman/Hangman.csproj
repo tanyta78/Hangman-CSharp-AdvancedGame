@@ -58,6 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConsoleSetup.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GibbetDrawing.cs" />
     <Compile Include="GuessingWordsManager.cs" />

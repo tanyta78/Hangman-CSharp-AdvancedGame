@@ -33,12 +33,13 @@ namespace Hangman
 
             for (int i = 0; i < Word.Length; i++)
             {
-                if (Word[i] == left || Word[i] == right)
+                if (Word[i] == left || Word[i] == right || Word[i] == ' ')
                 {
                     Content[i] = Word[i];
                 }   
             }
         }
+
         public char this[int index]
         {
             get

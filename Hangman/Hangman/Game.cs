@@ -45,8 +45,11 @@ namespace Hangman
                 player.Score = finalScore;
                 dbContext.SaveChanges();
             }
-           
-            
+
+            Console.WriteLine("Press any key to go back to the menu.");
+            Console.ReadKey();
+
+            Menu.Initialize();
         }
 
         private static void PlayGame(string[] words)

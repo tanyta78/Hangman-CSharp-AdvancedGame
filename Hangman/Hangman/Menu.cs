@@ -12,6 +12,7 @@
 
         public static void Initialize()
         {
+            ConsoleSetup.SetUp();
             UserManager.TryReadUserFromFile();
 
             Mode.Set(GameMode.Menu);
