@@ -112,7 +112,7 @@
         {
             {1, UserManager.RegisterUser },
             {2, UserManager.LogIn },
-            {3, GuessingWordsManager.ShowHighScores },
+            {3, ScoreBoard.PrintScoreBoard },
             {4, () => Console.WriteLine(Message.ThanksForPlaying, System.Drawing.Color.Gold) }
         };
 

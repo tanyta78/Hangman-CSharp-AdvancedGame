@@ -3,7 +3,7 @@ using Database;
 using Hangman.Utilities;
 using System.Drawing;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
+
 
 namespace Hangman
 {
@@ -64,16 +64,17 @@ namespace Hangman
         public static void PrintScoreBoard()
         {
             var topPlayers = dbContext.Users.OrderByDescending(x => x.Score).ToArray();
-            foreach (var topPlayer in topPlayers)
-            {
-                Console.WriteLine(topPlayer.Name);
-            }
             Console.Clear();
-            Console.WriteLine(Message.BestPlayersLabel);
+            Colorful.Console.WriteLine(Message.BestPlayersLabel.PadLeft(28),Color.Crimson);
+            Colorful.Console.WriteLine("---------------------------------",Color.GreenYellow);
             for (int j = 0; j < 5; j++)
-            {               
-                Colorful.Console.WriteLine($"{j + 1}. {topPlayers[j].Name} ===> {topPlayers[j].Score:F0} points", Color.Crimson);
+            {
+                Colorful.Console.WriteLine($"  {j + 1}.{topPlayers[j].Name.PadRight(15)}{topPlayers[j].Score:F0} points", Color.Crimson);
+                Colorful.Console.WriteLine("---------------------------------", Color.GreenYellow);
             }
+            Colorful.Console.WriteLine("Press any key to go back",Color.GreenYellow);
+            Colorful.Console.ReadKey();
+            Menu.Initialize();
         }
 
         public static void AddNewScore(Users player, int playerMistakes)
