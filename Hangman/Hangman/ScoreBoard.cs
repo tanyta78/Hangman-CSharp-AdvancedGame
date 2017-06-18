@@ -1,4 +1,6 @@
-﻿using Hangman.Utilities;
+﻿using Database;
+using Hangman.Utilities;
+using System.Drawing;
 
 namespace Hangman
 {
@@ -7,9 +9,9 @@ namespace Hangman
     public class ScoreBoard
     {
         public const int ScoresCount = 10;
-        private string[] bestPlayerNames = new string[ScoresCount];
+        private static string[] bestPlayerNames = new string[ScoresCount];
 
-        private int[] mistakes = new int[ScoresCount];
+        private static int[] mistakes = new int[ScoresCount];
 
         public ScoreBoard()
         {
@@ -20,13 +22,13 @@ namespace Hangman
             }
         }
 
-        public void PrintScoreBoard()
+        public static void PrintScoreBoard()
         {
             Console.WriteLine(Message.BestPlayersLabel);
             int i = 0;
             while (bestPlayerNames[i] != null)
             {
-                Console.WriteLine($"{i + 1}. {bestPlayerNames[i],15} ===> {mistakes[i],3} mistakes");
+                Colorful.Console.WriteLine($"{i + 1}. {bestPlayerNames[i],15} ===> {mistakes[i],3} mistakes", Color.Crimson);
                 i++;
                 if (i >= bestPlayerNames.Length)
                 {
@@ -35,13 +37,9 @@ namespace Hangman
             }
         }
 
-        public void AddNewScore(string playerName, int playerMistakes)
+        public static void AddNewScore(Users player, int playerMistakes)
         {
-            //find correct place index for player's result
-
             int indexInScoreBoard = FindCorrectIndex(playerMistakes);
-
-            //change scoreList
 
             if (indexInScoreBoard < bestPlayerNames.Length)
             {
@@ -51,12 +49,17 @@ namespace Hangman
                     mistakes[index] = mistakes[index - 1];
                 }
 
-                bestPlayerNames[indexInScoreBoard] = playerName;
+                bestPlayerNames[indexInScoreBoard] = player.Name;
                 mistakes[indexInScoreBoard] = playerMistakes;
+                Colorful.Console.WriteLine("You enter our highscore list! Congratulations!", Color.Aqua);
+            }
+            else
+            {
+                Colorful.Console.WriteLine("You score is not enougth to enter our highscore list! Maybe next time!", Color.DarkOrange);
             }
         }
 
-        private int FindCorrectIndex(int playerMistakes)
+        private static int FindCorrectIndex(int playerMistakes)
         {
             for (int i = 0; i < mistakes.Length; i++)
             {

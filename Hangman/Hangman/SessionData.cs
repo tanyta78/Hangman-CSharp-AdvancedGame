@@ -14,6 +14,8 @@ namespace Hangman
 
         public static string UserDataPath = @".\..\..\user.txt";
 
+        public static string ScoreBoardDataPath = @".\..\..\scoreboard.txt";
+
         public static string CurrentUser { get; set; }
 
         public static void WriteUserData(string username, string password)
@@ -39,6 +41,27 @@ namespace Hangman
             {
                 LoggedIn = false;
             }
+        }
+
+        public static void WriteScoreboardData(string username, string mistakes)
+        {
+            var scoreData = new string[] { username, mistakes };
+            File.WriteAllLines(ScoreBoardDataPath, scoreData);
+        }
+
+        public static List<string> ReadScoreboardData()
+        {
+            if (File.Exists(ScoreBoardDataPath))
+            {
+                var scoreboardData = File.ReadAllLines(ScoreBoardDataPath).ToList();
+
+                return scoreboardData;
+            }
+            else
+            {
+                throw new SomethingIsWrongWithUserFileException("Something went wrong with the scoreboard data file. Contact an administrator or something.");
+            }
+            
         }
 
         public static void LogOut()

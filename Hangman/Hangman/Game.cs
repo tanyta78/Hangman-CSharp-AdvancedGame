@@ -116,6 +116,7 @@ namespace Hangman
             {
                 Console.WriteLine("You got my word!");
                 Console.WriteLine($"You won with {mistakes} mistakes",Color.GreenYellow);
+                ScoreBoard.AddNewScore(player, mistakes);
             }
             else
             {

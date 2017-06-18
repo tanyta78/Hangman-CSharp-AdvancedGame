@@ -122,6 +122,7 @@
             {2, GuessingWordsManager.AddWords },
             {3, GuessingWordsManager.ListWords },
             {4, GuessingWordsManager.RemoveWord },
+            {5, ScoreBoard.PrintScoreBoard },
             {6, UserManager.LogOut },
             {7, () => Console.WriteLine(Message.ThanksForPlaying, System.Drawing.Color.Gold) }
         };
