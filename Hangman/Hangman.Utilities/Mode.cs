@@ -33,6 +33,7 @@ namespace Hangman.Utilities
 
         private static void UpdateConsole(int width, int height, bool isStatic)
         {
+            Console.Clear();
             Console.SetWindowSize(width, height);
             if (isStatic)
             {
