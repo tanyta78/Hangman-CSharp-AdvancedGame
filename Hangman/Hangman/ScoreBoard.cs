@@ -1,6 +1,9 @@
-﻿using Database;
+﻿using System.Diagnostics;
+using Database;
 using Hangman.Utilities;
 using System.Drawing;
+using System.Linq;
+using System.Runtime.Remoting.Messaging;
 
 namespace Hangman
 {
@@ -10,30 +13,66 @@ namespace Hangman
     {
         public const int ScoresCount = 10;
         private static string[] bestPlayerNames = new string[ScoresCount];
-
         private static int[] mistakes = new int[ScoresCount];
+        private static int gameLevel = 1;
+        private static int mistakesCount = 0;
+        public static Stopwatch sw = new Stopwatch();
+        public static TimeSpan remainingTime = TimeSpan.FromMinutes(2);
+        private static HangmanContext dbContext = new HangmanContext();
 
-        public ScoreBoard()
+        public ScoreBoard(int gameLevel,int mistakesCount)
         {
             for (int i = 0; i < bestPlayerNames.Length; i++)
             {
                 bestPlayerNames[i] = null;
                 mistakes[i] = int.MaxValue;
             }
+            ScoreBoard.gameLevel = gameLevel;
+            ScoreBoard.mistakesCount = mistakesCount;
+            sw.Reset();
+            sw.Start();
         }
 
+        public static double GetScore()
+        {
+            sw.Stop();
+            var gameTime = (remainingTime - sw.Elapsed).Seconds;
+            double levelPercent = 1.1;
+            if (ScoreBoard.gameLevel==1)
+            {
+                levelPercent = Constants.levelOne;
+            }
+            else if (ScoreBoard.gameLevel == 2)
+            {
+                levelPercent = Constants.levelTwo;
+            }
+            else if (ScoreBoard.gameLevel == 3)
+            {
+                levelPercent = Constants.levelThree;
+            }
+            else if (ScoreBoard.gameLevel == 4)
+            {
+                levelPercent = Constants.levelFour;
+            }
+            else if (ScoreBoard.gameLevel == 5)
+            {
+                levelPercent = Constants.levelFive;
+            }
+            var score = gameTime*levelPercent*(mistakesCount*Constants.mistakePercent)*100;
+            return score;
+        }
         public static void PrintScoreBoard()
         {
-            Console.WriteLine(Message.BestPlayersLabel);
-            int i = 0;
-            while (bestPlayerNames[i] != null)
+            var topPlayers = dbContext.Users.OrderByDescending(x => x.Score).ToArray();
+            foreach (var topPlayer in topPlayers)
             {
-                Colorful.Console.WriteLine($"{i + 1}. {bestPlayerNames[i],15} ===> {mistakes[i],3} mistakes", Color.Crimson);
-                i++;
-                if (i >= bestPlayerNames.Length)
-                {
-                    break;
-                }
+                Console.WriteLine(topPlayer.Name);
+            }
+            Console.Clear();
+            Console.WriteLine(Message.BestPlayersLabel);
+            for (int j = 0; j < 5; j++)
+            {               
+                Colorful.Console.WriteLine($"{j + 1}. {topPlayers[j].Name} ===> {topPlayers[j].Score:F0} points", Color.Crimson);
             }
         }
 

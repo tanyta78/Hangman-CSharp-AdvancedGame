@@ -1,5 +1,4 @@
 ﻿using Database;
-using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
 using Console = Colorful.Console;
@@ -7,19 +6,6 @@ namespace Hangman
 {
     public static class UserManager
     {
-
-        public static void TryReadUserFromFile()
-        {
-            if (!SessionData.LoggedIn)
-            {
-                SessionData.ReadUserData();
-                if (SessionData.LoggedIn)
-                {
-                    UserManager.CurrentUser = SessionData.CurrentUser;
-                }
-            }
-        }
-
         private static string currentUser = "";
         private static HangmanContext dbContext = new HangmanContext();
 
@@ -32,6 +18,18 @@ namespace Hangman
             set
             {
                 currentUser = value;
+            }
+        }
+
+        public static void TryReadUserFromFile()
+        {
+            if (!SessionData.LoggedIn)
+            {
+                SessionData.ReadUserData();
+                if (SessionData.LoggedIn)
+                {
+                    CurrentUser = SessionData.CurrentUser;
+                }
             }
         }
 
@@ -60,7 +58,7 @@ namespace Hangman
             else
             {
                 Console.WriteLine("Name is not available", Color.Aquamarine);
-                UserManager.RegisterUser();
+                RegisterUser();
             }
         }
 
@@ -72,7 +70,7 @@ namespace Hangman
             if (users.Count == 0)
             {
                 Console.WriteLine("No such user!", Color.Red);
-                UserManager.RegisterUser();
+                RegisterUser();
             }
             else
             {
@@ -81,7 +79,7 @@ namespace Hangman
                 if (password != users[0].Password)
                 {
                     Console.WriteLine("Wrong password:", Color.Red);
-                    UserManager.LogIn();
+                    LogIn();
                 }
                 else
                 {
@@ -91,7 +89,6 @@ namespace Hangman
                     Menu.Initialize();
                 }
             }
-
         }
 
         public static void LogOut()
@@ -102,6 +99,5 @@ namespace Hangman
             SessionData.LogOut();
             Menu.Initialize();
         }
-
     }
 }

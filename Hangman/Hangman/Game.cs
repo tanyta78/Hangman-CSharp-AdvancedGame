@@ -18,33 +18,35 @@ namespace Hangman
         private static HangmanContext dbContext = new HangmanContext();
         private static int gameLevel = 1;
         private static Users player = dbContext.Users.Where(x => x.Name == UserManager.CurrentUser).FirstOrDefault();
+        private static double finalScore = 0d;
+        private static double currentScore = 0d;
 
         public static void StartGame()
         {
             Mode.Set(GameMode.Game);
             isWon = true;
-                       
-            //if (words.Length == 0)
-            //{
-            //    Console.WriteLine(Message.GuessingWordFileEmpty, Color.Red);
-            //    Console.WriteLine(Message.PressAnyKeyForMenu, Color.PaleVioletRed);
-            //    Console.ReadKey();
 
-            //    Menu.Initialize();
-            //    return;
-            //}         
-            ScoreBoard scores = new ScoreBoard();
             while (gameLevel<6&&isWon == true)
             {
+                
                 mistakes = 0;
                 var words = dbContext.Words.Where(x => x.Level == gameLevel).Select(x => x.Name).ToArray();
-                PlayGame(words);                
+                PlayGame(words);
+                ScoreBoard score = new ScoreBoard(gameLevel,mistakes);
+                          
                 gameLevel++;
             }
             if (isWon)
             {
                  DisplayResult();
-            }                       
+            }
+            if (player.Score<finalScore)
+            {
+                player.Score = finalScore;
+                dbContext.SaveChanges();
+            }
+           
+            
         }
 
         private static void PlayGame(string[] words)
@@ -64,7 +66,7 @@ namespace Hangman
                 DrawGame(guesser, guessed, word, gibbet);
 
                 Console.SetCursorPosition(gibbet.Location[0], gibbet.Location[1] + 2);
-                Console.WriteWithGradient("Your guess: (or \"Escape\" to end) ", Color.Yellow, Color.Fuchsia, 15);
+                Console.WriteWithGradient("Your guess: (or \"Escape\" to end) ", Color.Yellow, Color.Fuchsia, 25);
                 Console.WriteLine();
                 ConsoleKeyInfo letterChoice = Console.ReadKey();
 
@@ -83,6 +85,8 @@ namespace Hangman
                     if (mistakes > Constants.AllowedMistakes)
                     {
                         isWon = false;
+                        currentScore = ScoreBoard.GetScore();
+                        finalScore += currentScore;
                         DisplayResult();
                         break;
                     }
@@ -90,13 +94,15 @@ namespace Hangman
                 }
 
                 guesser.Update(letter);
-            }           
+            }
+            currentScore = ScoreBoard.GetScore();
+            finalScore += currentScore;
         }
         private static void DrawGame(WordGuesser guesser, HashSet<char> guessed,string word,GibbetDrawing gibbet)
         {
             Console.Clear();
             Console.WriteLine("----------------------------------", Color.Aquamarine);
-            Console.WriteLine($"Player:{player.Name}  --  Best score:{player.Score}",Color.Khaki);
+            Console.WriteLine($"Player:{player.Name}  --  Best score:{player.Score:F0}",Color.Khaki);
             Console.WriteLine("----------------------------------", Color.Aquamarine);
             Console.WriteLine($"Current level:{gameLevel}    {Message.ChooseLetter}",Color.Khaki);
             Console.WriteLine("----------------------------------" ,Color.Aquamarine);
@@ -115,13 +121,13 @@ namespace Hangman
             if (isWon)
             {
                 Console.WriteLine("You got my word!");
-                Console.WriteLine($"You won with {mistakes} mistakes",Color.GreenYellow);
+                Console.WriteLine($"You won with -> Score:{finalScore:F0}",Color.GreenYellow);
                 ScoreBoard.AddNewScore(player, mistakes);
             }
             else
             {
                 Console.WriteLine("Maybe next time");
-                Console.WriteLine($"Your word was {word}",Color.Aqua);
+                Console.WriteLine($"Your word was {word}, Score:{finalScore:F0}",Color.Aqua);
             }
         }
 
