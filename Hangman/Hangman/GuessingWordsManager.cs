@@ -158,38 +158,18 @@ namespace Hangman
                     case ConsoleKey.Enter:
                         selectedWordId = 0;
                         ListWords(selectedWordId);
+
+                        startingChar = 'A';
+                        PrintAlphabet();
+                        ChooseChar();
+                        pressedKey = Console.ReadKey();
                         break;
                     case ConsoleKey.Tab:
                         //TODO Switch to search mode
                         //Search(word)
                         break;
                 }
-            }
-        }
-
-        private static void ChooseWord()
-        {
-            //TODO Pagination
-            Console.SetCursorPosition(1, selectedWordId - 7 >= 0 ? selectedWordId - 7 : 0);
-            var pressedKey = Console.ReadKey();
-
-            while (pressedKey.Key != ConsoleKey.Escape)
-            {
-                switch (pressedKey.Key)
-                {
-                    case ConsoleKey.DownArrow:
-                        ListWords(++selectedWordId);
-                        break;
-                    case ConsoleKey.UpArrow:
-                        ListWords(--selectedWordId);
-                        break;
-                    case ConsoleKey.Enter:
-                        DeleteWord(filtered[selectedWordId]);
-                        break;
-                }
-
-                System.Console.WriteLine("press ESCAPE key to go back to menu");
-                pressedKey = Console.ReadKey();
+                
             }
         }
 
@@ -234,8 +214,13 @@ namespace Hangman
                 dbContext.SaveChanges();
                 Console.SetCursorPosition(0, 1);
                 Console.WriteLine("Success!", Color.Lime);
+
+                //update lists
                 WordsList = WordsList.Where(x => x != word).ToList();
+                filtered = filtered.Where(x => x != word).ToList();
             }
+
+            Thread.Sleep(2000);
         }
 
         private static void PrintAlphabet()
@@ -440,6 +425,9 @@ namespace Hangman
                             }
                         }
                         break;
+                    case ConsoleKey.Enter:
+                        DeleteWord(filtered[selectedWordId]);
+                        break;
                     default:
                         key = Console.ReadKey();
                         break;
@@ -450,8 +438,6 @@ namespace Hangman
                     break;
                 }
             }
-
-            ChooseWord();
         }
 
         public static void ShowHighScores()
