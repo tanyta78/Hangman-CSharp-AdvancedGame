@@ -19,6 +19,11 @@ namespace Hangman
 //        private const string wordsPath = "../../Dictionary/words.txt";
         private static HangmanContext dbContext = new HangmanContext();
 
+        private static char startingChar { get; set; }
+        private static int selectedWordId { get; set; }
+        private static List<string> WordsList { get; set; }
+        private static List<string> filtered { get; set; }
+
         public static void AddWords()
         {
             Console.Clear();
@@ -105,12 +110,117 @@ namespace Hangman
 
         public static void RemoveWord()
         {
-            Console.Clear();
-            Console.WriteLine("Enter the word to be removed: ", Color.Yellow);
-            var word = Console.ReadLine().ToLower();
+            startingChar = 'A';
 
-            var wordToRemove = dbContext.Words.Where(x => x.Name == word).FirstOrDefault<Words>();
-            //Console.WriteLine(wordToRemove.Name);
+            PrintAlphabet();
+            ChooseChar();
+
+            Console.WriteLine(Message.PressAnyKeyForMenu, Color.LightSteelBlue);
+            Menu.Initialize();
+        }
+
+        private static void ChooseChar()
+        {
+            var pressedKey = Console.ReadKey();
+
+            while (pressedKey.Key != ConsoleKey.Escape)
+            {
+                switch (pressedKey.Key)
+                {
+                    case ConsoleKey.RightArrow:
+                    case ConsoleKey.UpArrow:
+                        if (startingChar != 'Z')
+                        {
+                            ++startingChar;
+                            PrintAlphabet();
+                        }
+                        else
+                        {
+                            startingChar = 'A';
+                            PrintAlphabet();
+                        }
+                        pressedKey = Console.ReadKey();
+                        break;
+                    case ConsoleKey.LeftArrow:
+                    case ConsoleKey.DownArrow:
+                        if (startingChar != 'A')
+                        {
+                            --startingChar;
+                            PrintAlphabet();
+                        }
+                        else
+                        {
+                            startingChar = 'Z';
+                            PrintAlphabet();
+                        }
+                        pressedKey = Console.ReadKey();
+                        break;
+                    case ConsoleKey.Enter:
+                        selectedWordId = 0;
+                        ListWords(selectedWordId);
+                        break;
+                }
+
+            }
+        }
+
+        private static void ChooseWord()
+        {
+            //TODO Pagination
+            Console.SetCursorPosition(1, selectedWordId - 7 >= 0 ? selectedWordId - 7 : 0);
+            var pressedKey = Console.ReadKey();
+
+            while (pressedKey.Key != ConsoleKey.Escape)
+            {
+                switch (pressedKey.Key)
+                {
+                    case ConsoleKey.DownArrow:
+                        ListWords(++selectedWordId);
+                        break;
+                    case ConsoleKey.UpArrow:
+                        ListWords(--selectedWordId);
+                        break;
+                    case ConsoleKey.Enter:
+                        DeleteWord(filtered[selectedWordId]);
+                        break;
+                }
+
+                System.Console.WriteLine("press ESCAPE key to go back to menu");
+                pressedKey = Console.ReadKey();
+            }
+        }
+
+        private static bool areYouSure()
+        {
+            Console.Clear();
+            Console.WriteLine(">>> Are you sure you want to delete this word??? Y/N <<<", Color.Red);
+
+            while (true)
+            {
+                var input = Console.ReadKey();
+                switch (input.KeyChar)
+                {
+                    case 'y':
+                    case 'Y':
+                        return true;
+                    case 'n':
+                    case 'N':
+                        return false;
+                    default:
+                        input = Console.ReadKey();
+                        break;
+                }
+            }
+        }
+
+        private static void DeleteWord(string word)
+        {
+            if (!areYouSure())
+            {
+                return;
+            }
+
+            var wordToRemove = dbContext.Words.FirstOrDefault(x => x.Name == word);
             if (wordToRemove == null)
             {
                 Console.WriteLine("The word is not contained in the list!", Color.Red);
@@ -119,11 +229,28 @@ namespace Hangman
             {
                 dbContext.Entry(wordToRemove).State = System.Data.Entity.EntityState.Deleted;
                 dbContext.SaveChanges();
+                Console.SetCursorPosition(0,1);
                 Console.WriteLine("Success!", Color.Lime);
+                WordsList = WordsList.Where(x => x != word).ToList();
             }
-            Console.WriteLine(Message.PressAnyKeyForMenu, Color.LightSteelBlue);
 
-            Menu.Initialize();
+        }
+
+        private static void PrintAlphabet()
+        {
+            Console.Clear();
+            for (char i = 'A'; i <= 'Z'; i++)
+            {
+                if (i != startingChar)
+                {
+                    Console.Write($"[{i}] ", Color.AliceBlue);
+                }
+                else
+                {
+                    Console.Write($"[{i}] ", Color.LimeGreen);
+                }
+            }
+            System.Console.WriteLine();
         }
 
         public static void ListWords()
@@ -131,9 +258,9 @@ namespace Hangman
             Console.Clear();
             Mode.Set(GameMode.Dictionary);
 
-            var list = dbContext.Words.Select(x => x.Name).ToList();
-            //var words = File.ReadAllLines(wordsPath);
-            var groupedWords = list.Where(w => !string.IsNullOrWhiteSpace(w)).GroupBy(w => w[0]).OrderBy(g => g.Key);
+            WordsList = dbContext.Words.Select(x => x.Name).ToList();
+            var groupedWords = WordsList.Where(w => !string.IsNullOrWhiteSpace(w)).GroupBy(w => w[0])
+                .OrderBy(g => g.Key);
 
             foreach (var group in groupedWords)
             {
@@ -144,6 +271,38 @@ namespace Hangman
             Console.ReadKey();
 
             Menu.Initialize();
+        }
+
+        public static void ListWords(int dummy)
+        {
+            Console.Clear();
+            Console.WriteLine("Press Escape to go back", Color.Yellow);
+            Mode.Set(GameMode.Dictionary);
+
+            if (WordsList == null || WordsList.Count == 0)
+            {
+                WordsList = dbContext.Words.Select(x => x.Name).ToList();
+            }
+            filtered = WordsList.Where(w => w[0].ToString().ToUpper() == startingChar.ToString()).ToList();
+
+            if (selectedWordId == filtered.Count)
+            {
+                selectedWordId = 0;
+            }
+
+            for (int i = 0; i < filtered.Count; i++)
+            {
+                if (i != selectedWordId)
+                {
+                    Console.WriteLine(filtered[i], Color.DarkOrchid);
+                }
+                else
+                {
+                    Console.WriteLine($">>{filtered[i]}<<", Color.LimeGreen);
+                }
+            }
+
+            ChooseWord();
         }
 
         public static void ShowHighScores()
