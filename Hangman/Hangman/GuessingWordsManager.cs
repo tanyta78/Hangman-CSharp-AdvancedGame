@@ -389,6 +389,7 @@ namespace Hangman
                         {
                             --currentPage;
                         }
+                        selectedWordId = (currentPage - 1) * 12;
                         break;
                     case ConsoleKey.RightArrow:
                         if (currentPage == pages)
@@ -399,6 +400,7 @@ namespace Hangman
                         {
                             ++currentPage;
                         }
+                        selectedWordId = (currentPage - 1) * 12;
                         break;
                     case ConsoleKey.DownArrow:
                         selectedWordId++;
