@@ -292,7 +292,7 @@ namespace Hangman
             {
                 Console.Clear();
                 var linesOnCurrentPage = Math.Min(currentPageNumber + linesPerPage, allLines.Length);
-                for (int i = currentPageNumber; i < linesOnCurrentPage - 1; i++)
+                for (int i = currentPageNumber; i < linesOnCurrentPage; i++)
                 {
                     Console.WriteLine(allLines[i], Color.Pink);
                 }

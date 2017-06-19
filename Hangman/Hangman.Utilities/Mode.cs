@@ -20,29 +20,22 @@ namespace Hangman.Utilities
             switch (gm)
             {
                 case GameMode.Menu:
-                    UpdateConsole(Constants.ConsoleMenuWidth, Constants.ConsoleMenuHeight, true);
+                    UpdateConsole(Constants.ConsoleMenuWidth, Constants.ConsoleMenuHeight);
                     break;
                 case GameMode.Game:
-                    UpdateConsole(Constants.ConsoleGameWidth, Constants.ConsoleGameHeight, true);
+                    UpdateConsole(Constants.ConsoleGameWidth, Constants.ConsoleGameHeight);
                     break;
                 case GameMode.Dictionary:
-                    UpdateConsole(Constants.ConsoleDictionaryWidth, Constants.ConsoleMenuHeight, false);
+                    UpdateConsole(Constants.ConsoleDictionaryWidth, Constants.ConsoleMenuHeight);
                     break;
             }
         }
 
-        private static void UpdateConsole(int width, int height, bool isStatic)
+        private static void UpdateConsole(int width, int height)
         {
             Console.Clear();
             Console.SetWindowSize(width, height);
-            if (isStatic)
-            {
-                Console.SetBufferSize(width, height);
-            }
-            else
-            {
-                Console.SetBufferSize(width, Int16.MaxValue - 1);
-            }
+            Console.SetBufferSize(width, height);
         }
     }
 }
