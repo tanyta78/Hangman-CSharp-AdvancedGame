@@ -11,12 +11,13 @@ using Database;
 using Hangman.Utilities;
 using Console = Colorful.Console;
 using Message = Hangman.Utilities.Message;
+using System.Text;
 
 namespace Hangman
 {
     public class GuessingWordsManager
     {
-//        private const string wordsPath = "../../Dictionary/words.txt";
+        //        private const string wordsPath = "../../Dictionary/words.txt";
         private static HangmanContext dbContext = new HangmanContext();
 
         private static char startingChar { get; set; }
@@ -27,23 +28,22 @@ namespace Hangman
         public static void AddWords()
         {
             Console.Clear();
-            Console.WriteLine("Enter a word to add or STOP to go back");
 
             OpenFileDialog ofd = new OpenFileDialog();
 
             string wordsPath = "";
-            var t = new Thread((ThreadStart) (() =>
-            {
-                OpenFileDialog fbd = new OpenFileDialog();
-                ofd.Filter = "TXT|*.txt";
+            var t = new Thread((ThreadStart)(() =>
+           {
+               OpenFileDialog fbd = new OpenFileDialog();
+               ofd.Filter = "TXT|*.txt";
 
-                if (ofd.ShowDialog() == DialogResult.Cancel)
-                    return;
-                else
-                {
-                    wordsPath = ofd.FileName;
-                }
-            }));
+               if (ofd.ShowDialog() == DialogResult.Cancel)
+                   return;
+               else
+               {
+                   wordsPath = ofd.FileName;
+               }
+           }));
 
             t.SetApartmentState(ApartmentState.STA);
             t.Start();
@@ -229,7 +229,7 @@ namespace Hangman
             {
                 dbContext.Entry(wordToRemove).State = System.Data.Entity.EntityState.Deleted;
                 dbContext.SaveChanges();
-                Console.SetCursorPosition(0,1);
+                Console.SetCursorPosition(0, 1);
                 Console.WriteLine("Success!", Color.Lime);
                 WordsList = WordsList.Where(x => x != word).ToList();
             }
@@ -259,16 +259,66 @@ namespace Hangman
             Mode.Set(GameMode.Dictionary);
 
             WordsList = dbContext.Words.Select(x => x.Name).ToList();
-            var groupedWords = WordsList.Where(w => !string.IsNullOrWhiteSpace(w)).GroupBy(w => w[0])
+            var groupedWords = WordsList.Where(w => !string.IsNullOrWhiteSpace(w)).GroupBy(w => w.ToLower()[0])
                 .OrderBy(g => g.Key);
 
+            var maxLineLenght = Constants.ConsoleDictionaryWidth;
+            var linesPerPage = Constants.ConsoleMenuHeight - 2;
+            var currentPageNumber = 0;
+            var allText = new StringBuilder();
             foreach (var group in groupedWords)
             {
-                Console.WriteLine(group.Key, Color.Red);
-                Console.WriteLine($"[{string.Join(", ", group.ToList().OrderBy(w => w))}]", Color.DarkOrchid);
+                allText.AppendLine($"[{group.Key}]");
+                var words = $"[{string.Join(", ", group.ToList())}]";
+                while (words.Length > 0)
+                {
+                    var toTake = Math.Min(maxLineLenght - 1, words.Length);
+                    allText.AppendLine(words.Substring(0, toTake));
+                    words = words.Remove(0, toTake);
+                }
+                allText.AppendLine();
             }
-            Console.WriteLine(Message.PressAnyKeyForMenu, Color.LightSteelBlue);
-            Console.ReadKey();
+
+            var allLines = allText.ToString().Split('\n');
+
+            while (true)
+            {
+                Console.Clear();
+                var linesOnCurrentPage = Math.Min(currentPageNumber + linesPerPage, allLines.Length);
+                for (int i = currentPageNumber; i < linesOnCurrentPage; i++)
+                {
+                    Console.WriteLine(allLines[i], Color.Pink);
+                }
+                Console.WriteLine("Press the up and down arrow to navigate or ESC to exit");
+                var key = Console.ReadKey();
+
+                var exit = false;
+                switch (key.Key)
+                {
+                    case ConsoleKey.Escape:
+                        exit = true;
+                        break;
+                    case ConsoleKey.UpArrow:
+                        if (currentPageNumber > 0)
+                        {
+                            currentPageNumber -= linesPerPage / 2;
+                        }
+                        break;
+                    case ConsoleKey.DownArrow:
+                        if (currentPageNumber < allLines.Length - linesPerPage)
+                        {
+                            currentPageNumber += linesPerPage / 2;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+
+                if (exit)
+                {
+                    break;
+                }
+            }
 
             Menu.Initialize();
         }
