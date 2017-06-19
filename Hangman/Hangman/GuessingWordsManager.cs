@@ -32,18 +32,18 @@ namespace Hangman
             OpenFileDialog ofd = new OpenFileDialog();
 
             string wordsPath = "";
-            var t = new Thread((ThreadStart) (() =>
-            {
-                OpenFileDialog fbd = new OpenFileDialog();
-                ofd.Filter = "TXT|*.txt";
+            var t = new Thread((ThreadStart)(() =>
+           {
+               OpenFileDialog fbd = new OpenFileDialog();
+               ofd.Filter = "TXT|*.txt";
 
-                if (ofd.ShowDialog() == DialogResult.Cancel)
-                    return;
-                else
-                {
-                    wordsPath = ofd.FileName;
-                }
-            }));
+               if (ofd.ShowDialog() == DialogResult.Cancel)
+                   return;
+               else
+               {
+                   wordsPath = ofd.FileName;
+               }
+           }));
 
             t.SetApartmentState(ApartmentState.STA);
             t.Start();
@@ -128,7 +128,6 @@ namespace Hangman
                 switch (pressedKey.Key)
                 {
                     case ConsoleKey.RightArrow:
-                    case ConsoleKey.UpArrow:
                         if (startingChar != 'Z')
                         {
                             ++startingChar;
@@ -142,7 +141,6 @@ namespace Hangman
                         pressedKey = Console.ReadKey();
                         break;
                     case ConsoleKey.LeftArrow:
-                    case ConsoleKey.DownArrow:
                         if (startingChar != 'A')
                         {
                             --startingChar;
@@ -169,7 +167,7 @@ namespace Hangman
                         //Search(word)
                         break;
                 }
-                
+
             }
         }
 
@@ -259,7 +257,7 @@ namespace Hangman
 
             foreach (var group in groupedWords)
             {
-                allText.AppendLine($"[{group.Key}]");
+                allText.AppendLine($"[{group.Key} - {group.ToList().Count} words]");
                 var words = new Stack<string>(group.ToList());
                 while (words.Count > 0)
                 {
@@ -327,12 +325,10 @@ namespace Hangman
             Console.Clear();
             Mode.Set(GameMode.Dictionary);
 
+            var words = dbContext.Words.Select(x => x.Name).ToList();
             //create query to db if list is empty
-            if (WordsList == null || WordsList.Count == 0)
-            {
-                WordsList = dbContext.Words.Select(x => x.Name).ToList();
-            }
-            filtered = WordsList.Where(w => w[0].ToString().ToUpper() == startingChar.ToString()).ToList();
+
+            filtered = words.Where(w => w.ToLower()[0] == startingChar.ToString().ToLower()[0]).OrderBy(w => w).ToList();
 
             if (selectedWordId == filtered.Count)
             {
@@ -351,10 +347,11 @@ namespace Hangman
 
             //Three lines go to user info output (directions, etc)
 
+
             while (true)
             {
                 Console.Clear();
-                var linesOnCurrentPage = Math.Min(allowedLines, filtered.Count - currentPage * allowedLines);
+                var linesOnCurrentPage = Math.Min(allowedLines, filtered.Count - (currentPage - 1) * allowedLines);
 
                 //printing current page
                 var startingIndex = (currentPage - 1) * allowedLines;
@@ -362,17 +359,17 @@ namespace Hangman
                 {
                     if (i != selectedWordId)
                     {
-                        Console.WriteLine(filtered[i], Color.LightPink);
+                        Console.WriteLine($"{i + 1}. {filtered[i]}", Color.LightPink);
                     }
                     else
                     {
-                        Console.WriteLine($">>{filtered[i]}<<", Color.LimeGreen);
+                        Console.WriteLine($">> {i + 1}. {filtered[i]}<<", Color.LimeGreen);
                     }
                 }
 
                 //print navigation info
                 Console.WriteLine("Press Escape to go back, Right/Left arrow to navigate", Color.Yellow);
-                System.Console.WriteLine($"Page {currentPage}|{pages}");
+                Console.WriteLine($"Page {currentPage}|{pages}", Color.Yellow);
 
                 var key = Console.ReadKey();
 
