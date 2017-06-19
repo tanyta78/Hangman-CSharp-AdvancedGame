@@ -32,18 +32,18 @@ namespace Hangman
             OpenFileDialog ofd = new OpenFileDialog();
 
             string wordsPath = "";
-            var t = new Thread((ThreadStart)(() =>
-           {
-               OpenFileDialog fbd = new OpenFileDialog();
-               ofd.Filter = "TXT|*.txt";
+            var t = new Thread((ThreadStart) (() =>
+            {
+                OpenFileDialog fbd = new OpenFileDialog();
+                ofd.Filter = "TXT|*.txt";
 
-               if (ofd.ShowDialog() == DialogResult.Cancel)
-                   return;
-               else
-               {
-                   wordsPath = ofd.FileName;
-               }
-           }));
+                if (ofd.ShowDialog() == DialogResult.Cancel)
+                    return;
+                else
+                {
+                    wordsPath = ofd.FileName;
+                }
+            }));
 
             t.SetApartmentState(ApartmentState.STA);
             t.Start();
@@ -159,8 +159,11 @@ namespace Hangman
                         selectedWordId = 0;
                         ListWords(selectedWordId);
                         break;
+                    case ConsoleKey.Tab:
+                        //TODO Switch to search mode
+                        //Search(word)
+                        break;
                 }
-
             }
         }
 
@@ -233,7 +236,6 @@ namespace Hangman
                 Console.WriteLine("Success!", Color.Lime);
                 WordsList = WordsList.Where(x => x != word).ToList();
             }
-
         }
 
         private static void PrintAlphabet()
@@ -251,6 +253,9 @@ namespace Hangman
                 }
             }
             System.Console.WriteLine();
+
+            System.Console.WriteLine();
+            Console.WriteLine("Press Tab to switch to Search mode: ", Color.LightPink);
         }
 
         public static void ListWords()
@@ -263,9 +268,10 @@ namespace Hangman
                 .OrderBy(g => g.Key);
 
             var maxLineLenght = Constants.ConsoleDictionaryWidth - 1;
-            var linesPerPage = Constants.ConsoleMenuHeight - 2;
+            var linesPerPage = Constants.ConsoleMenuHeigth - 2;
             var currentPageNumber = 0;
             var allText = new StringBuilder();
+
             foreach (var group in groupedWords)
             {
                 allText.AppendLine($"[{group.Key}]");
@@ -292,6 +298,7 @@ namespace Hangman
             {
                 Console.Clear();
                 var linesOnCurrentPage = Math.Min(currentPageNumber + linesPerPage, allLines.Length);
+
                 for (int i = currentPageNumber; i < linesOnCurrentPage; i++)
                 {
                     Console.WriteLine(allLines[i], Color.Pink);
@@ -333,9 +340,9 @@ namespace Hangman
         public static void ListWords(int dummy)
         {
             Console.Clear();
-            Console.WriteLine("Press Escape to go back", Color.Yellow);
             Mode.Set(GameMode.Dictionary);
 
+            //create query to db if list is empty
             if (WordsList == null || WordsList.Count == 0)
             {
                 WordsList = dbContext.Words.Select(x => x.Name).ToList();
@@ -347,15 +354,100 @@ namespace Hangman
                 selectedWordId = 0;
             }
 
-            for (int i = 0; i < filtered.Count; i++)
+            int currentPage = 1;
+
+            var allowedLines = Constants.ConsoleDictionaryHeigth - 3;
+            int pages = filtered.Count / allowedLines;
+
+            if (filtered.Count % Constants.ConsoleDictionaryHeigth != 0)
             {
-                if (i != selectedWordId)
+                pages++;
+            }
+
+            //Three lines go to user info output (directions, etc)
+
+            while (true)
+            {
+                Console.Clear();
+                var linesOnCurrentPage = Math.Min(allowedLines, filtered.Count - currentPage * allowedLines);
+
+                //printing current page
+                var startingIndex = (currentPage - 1) * allowedLines;
+                for (int i = startingIndex; i < startingIndex + linesOnCurrentPage; i++)
                 {
-                    Console.WriteLine(filtered[i], Color.DarkOrchid);
+                    if (i != selectedWordId)
+                    {
+                        Console.WriteLine(filtered[i], Color.LightPink);
+                    }
+                    else
+                    {
+                        Console.WriteLine($">>{filtered[i]}<<", Color.LimeGreen);
+                    }
                 }
-                else
+
+                //print navigation info
+                Console.WriteLine("Press Escape to go back, Right/Left arrow to navigate", Color.Yellow);
+                System.Console.WriteLine($"Page {currentPage}|{pages}");
+
+                var key = Console.ReadKey();
+
+                //changing pages
+                var exit = false;
+                switch (key.Key)
                 {
-                    Console.WriteLine($">>{filtered[i]}<<", Color.LimeGreen);
+                    case ConsoleKey.Escape:
+                        exit = true;
+                        break;
+                    case ConsoleKey.LeftArrow:
+                        if (currentPage == 1)
+                        {
+                            currentPage = pages;
+                        }
+                        else
+                        {
+                            --currentPage;
+                        }
+                        break;
+                    case ConsoleKey.RightArrow:
+                        if (currentPage == pages)
+                        {
+                            currentPage = 1;
+                        }
+                        else
+                        {
+                            ++currentPage;
+                        }
+                        break;
+                    case ConsoleKey.DownArrow:
+                        selectedWordId++;
+                        if (selectedWordId % allowedLines == 0)
+                        {
+                            ++currentPage;
+                        }
+                        break;
+                    case ConsoleKey.UpArrow:
+                        if (selectedWordId == 0)
+                        {
+                            selectedWordId = filtered.Count - 1;
+                            currentPage = pages;
+                        }
+                        else
+                        {
+                            selectedWordId--;
+                            if ((selectedWordId + 1) % allowedLines == 0)
+                            {
+                                --currentPage;
+                            }
+                        }
+                        break;
+                    default:
+                        key = Console.ReadKey();
+                        break;
+                }
+
+                if (exit)
+                {
+                    break;
                 }
             }
 

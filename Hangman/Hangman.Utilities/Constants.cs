@@ -11,12 +11,13 @@ namespace Hangman.Utilities
         public static int AllowedMistakes = 8;
 
         public static int ConsoleMenuWidth = 60;
-        public static int ConsoleMenuHeight = 15;
+        public static int ConsoleMenuHeigth = 15;
 
         public static int ConsoleGameWidth = 60;
-        public static int ConsoleGameHeight = 50;
+        public static int ConsoleGameHeigth = 50;
 
         public static int ConsoleDictionaryWidth = 80;
+        public static int ConsoleDictionaryHeigth = 15;
 
         public static double levelOne = 1.1;
         public static double levelTwo = 1.2;

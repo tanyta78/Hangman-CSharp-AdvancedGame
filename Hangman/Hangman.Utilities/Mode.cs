@@ -20,13 +20,13 @@ namespace Hangman.Utilities
             switch (gm)
             {
                 case GameMode.Menu:
-                    UpdateConsole(Constants.ConsoleMenuWidth, Constants.ConsoleMenuHeight);
+                    UpdateConsole(Constants.ConsoleMenuWidth, Constants.ConsoleMenuHeigth);
                     break;
                 case GameMode.Game:
-                    UpdateConsole(Constants.ConsoleGameWidth, Constants.ConsoleGameHeight);
+                    UpdateConsole(Constants.ConsoleGameWidth, Constants.ConsoleGameHeigth);
                     break;
                 case GameMode.Dictionary:
-                    UpdateConsole(Constants.ConsoleDictionaryWidth, Constants.ConsoleMenuHeight);
+                    UpdateConsole(Constants.ConsoleDictionaryWidth, Constants.ConsoleDictionaryHeigth);
                     break;
             }
         }
