@@ -262,19 +262,26 @@ namespace Hangman
             var groupedWords = WordsList.Where(w => !string.IsNullOrWhiteSpace(w)).GroupBy(w => w.ToLower()[0])
                 .OrderBy(g => g.Key);
 
-            var maxLineLenght = Constants.ConsoleDictionaryWidth;
+            var maxLineLenght = Constants.ConsoleDictionaryWidth - 1;
             var linesPerPage = Constants.ConsoleMenuHeight - 2;
             var currentPageNumber = 0;
             var allText = new StringBuilder();
             foreach (var group in groupedWords)
             {
                 allText.AppendLine($"[{group.Key}]");
-                var words = $"[{string.Join(", ", group.ToList())}]";
-                while (words.Length > 0)
+                var words = new Stack<string>(group.ToList());
+                while (words.Count > 0)
                 {
-                    var toTake = Math.Min(maxLineLenght - 1, words.Length);
-                    allText.AppendLine(words.Substring(0, toTake));
-                    words = words.Remove(0, toTake);
+                    var currentLine = "";
+                    while (words.Count > 0 && currentLine.Length + words.Peek().Length < maxLineLenght - 2)
+                    {
+                        currentLine = string.Concat(currentLine, words.Pop());
+                        if (words.Count != 0)
+                        {
+                            currentLine = string.Concat(currentLine, ", ");
+                        }
+                    }
+                    allText.AppendLine(currentLine);
                 }
                 allText.AppendLine();
             }
@@ -285,7 +292,7 @@ namespace Hangman
             {
                 Console.Clear();
                 var linesOnCurrentPage = Math.Min(currentPageNumber + linesPerPage, allLines.Length);
-                for (int i = currentPageNumber; i < linesOnCurrentPage; i++)
+                for (int i = currentPageNumber; i < linesOnCurrentPage - 1; i++)
                 {
                     Console.WriteLine(allLines[i], Color.Pink);
                 }
