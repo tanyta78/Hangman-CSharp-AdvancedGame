@@ -20,15 +20,15 @@ namespace Hangman
         private static Users player = dbContext.Users.Where(x => x.Name == UserManager.CurrentUser).FirstOrDefault();
         private static double finalScore = 0d;
         private static double currentScore = 0d;
+        private static GibbetDrawing gibbet;
 
         public static void StartGame()
         {
             Mode.Set(GameMode.Game);
             isWon = true;
 
-            while (gameLevel < 6 && isWon == true)
+            while (gameLevel < 6 && isWon)
             {
-
                 mistakes = 0;
                 var words = dbContext.Words.Where(x => x.Level == gameLevel).Select(x => x.Name).ToArray();
                 PlayGame(words);
@@ -36,6 +36,7 @@ namespace Hangman
 
                 gameLevel++;
             }
+
             if (isWon)
             {
                 DisplayResult();
@@ -61,8 +62,8 @@ namespace Hangman
             WordGuesser guesser = new WordGuesser(word);
             HashSet<char> guessed = new HashSet<char>();
 
-            //TODO: fix hardcoding this
-            GibbetDrawing gibbet = new GibbetDrawing(0, 11 + 15);
+            //11 rows for user info output
+            gibbet = new GibbetDrawing(0,Constants.GibbetHeight + 11);
 
             while (guesser.ToString() != word && mistakes <= Constants.AllowedMistakes)
             {
@@ -76,7 +77,6 @@ namespace Hangman
 
                 if (letterChoice.Key == ConsoleKey.Escape)
                 {
-                    //TODO: "Are you sure" prompt
                     Menu.Initialize();
                     break;
                 }
@@ -100,7 +100,6 @@ namespace Hangman
                 }
 
                 guesser.Update(letter);
-
                 DrawGame(guesser, guessed, word, gibbet);
             }
             currentScore = ScoreBoard.GetScore();
@@ -126,6 +125,7 @@ namespace Hangman
         }
         private static void DisplayResult()
         {
+            Console.SetCursorPosition(0,gibbet.Location[1] + 2);
             if (isWon)
             {
                 Console.WriteLine("You got my word!");

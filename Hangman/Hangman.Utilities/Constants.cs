@@ -26,5 +26,7 @@ namespace Hangman.Utilities
         public static double levelFive = 1.5;
 
         public static double mistakePercent = 0.05;
+
+        public static int GibbetHeight = 15;
     }
 }
