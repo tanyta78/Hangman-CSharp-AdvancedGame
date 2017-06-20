@@ -24,6 +24,7 @@ namespace Hangman
         private static int selectedWordId { get; set; }
         private static List<string> WordsList { get; set; }
         private static List<string> filtered { get; set; }
+        private static ConsoleKeyInfo LastKeyPressed { get; set; }
 
         public static void AddWords()
         {
@@ -478,25 +479,41 @@ namespace Hangman
         }
 
         /// <summary>
-        /// Searches through the WordList on character input for words starting with the current substring
+        /// Searches through the loaded words on character input for words starting with the current substring
         /// </summary>
         /// <param name="substring"></param>
         private static void Search(string substring = "")
         {
-            LoadWords();
+            //create query to db if list is empty
+            if (WordsList == null || WordsList.Count == 0)
+            {
+                WordsList = dbContext.Words.Select(x => x.Name).ToList();
+            }
+
+            //TODO: WHEN A LETTER BUTTON IS CLICKED 
             ListWords(substring);
 
-            //on input - CAN INPUT LETTERS and TAB ONLY
-            var input = Console.ReadKey();
-            var character = input.KeyChar;
+            char character = 'a';
 
-            //recursion bottom
-            if (input.Key == ConsoleKey.Tab)
+            //on input - CAN INPUT LETTERS and TAB ONLY
+            if (LastKeyPressed.Key == ConsoleKey.Tab)
             {
+                //recursion bottom 
                 PrintAlphabet();
                 return;
             }
 
+            var lastKeyChar = LastKeyPressed.KeyChar.ToString().ToLower()[0];
+            if (lastKeyChar >= 'a' && lastKeyChar <= 'z') // is a letter
+            {
+                character = lastKeyChar;
+            }
+            else
+            {
+                var input = Console.ReadKey();
+                character = input.KeyChar;
+            }
+           
             Search(substring + character);
         }
 
@@ -506,7 +523,7 @@ namespace Hangman
             Console.WriteLine("Searched word: " + substring);
         }
 
-        public static void ListWords(string substring)
+        private static void ListWords(string substring)
         {
             if (substring == String.Empty)
             {
@@ -529,6 +546,7 @@ namespace Hangman
             }
 
 
+            //draw pages loop
             while (true)
             {
                 Console.Clear();
@@ -622,6 +640,8 @@ namespace Hangman
                         exit = true;
                         break;
                 }
+
+                LastKeyPressed = key;
 
                 if (exit)
                 {
