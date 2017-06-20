@@ -32,13 +32,16 @@ namespace Hangman
             OpenFileDialog ofd = new OpenFileDialog();
 
             string wordsPath = "";
+            var exited = false;
             var t = new Thread((ThreadStart) (() =>
             {
                 OpenFileDialog fbd = new OpenFileDialog();
                 ofd.Filter = "TXT|*.txt";
 
                 if (ofd.ShowDialog() == DialogResult.Cancel)
-                    return;
+                {
+                    exited = true;
+                }
                 else
                 {
                     wordsPath = ofd.FileName;
@@ -48,62 +51,64 @@ namespace Hangman
             t.SetApartmentState(ApartmentState.STA);
             t.Start();
             t.Join();
-            Console.WriteLine(wordsPath);
+            //Console.WriteLine(wordsPath);
 
-
-            if (!File.Exists(wordsPath))
+            if (!exited)
             {
-                File.Create(wordsPath);
+                if (!File.Exists(wordsPath))
+                {
+                    File.Create(wordsPath);
+                }
+
+                int level = 0;
+                var words = File.ReadAllLines(wordsPath).Where(w => w != "").ToList();
+
+                var wordsToAdd = new List<Words>();
+
+                foreach (var word in words)
+                {
+                    if (word.Length <= 5)
+                    {
+                        level = 1;
+                    }
+                    else if (word.Length > 5 && word.Length <= 10)
+                    {
+                        level = 2;
+                    }
+                    else if (word.Length > 10 && word.Length <= 15)
+                    {
+                        level = 3;
+                    }
+                    else if (word.Length > 15 && word.Length <= 20)
+                    {
+                        level = 4;
+                    }
+                    else if (word.Length > 20)
+                    {
+                        level = 5;
+                    }
+
+                    var wordToAdd = new Words()
+                    {
+                        Name = word,
+                        Level = level
+                    };
+
+                    var isInDB = dbContext.Words.Any(x => x.Name.ToLower() == word);
+
+                    if (isInDB)
+                    {
+                        Console.WriteLine("{0} is already available", word, Color.Red);
+                    }
+                    else
+                    {
+                        wordsToAdd.Add(wordToAdd);
+                    }
+                }
+
+                dbContext.Words.AddOrUpdate(wordsToAdd.ToArray());
+                dbContext.SaveChanges();
             }
-
-            int level = 0;
-            var words = File.ReadAllLines(wordsPath).Where(w => w != "").ToList();
-
-            var wordsToAdd = new List<Words>();
-
-            foreach (var word in words)
-            {
-                if (word.Length <= 5)
-                {
-                    level = 1;
-                }
-                else if (word.Length > 5 && word.Length <= 10)
-                {
-                    level = 2;
-                }
-                else if (word.Length > 10 && word.Length <= 15)
-                {
-                    level = 3;
-                }
-                else if (word.Length > 15 && word.Length <= 20)
-                {
-                    level = 4;
-                }
-                else if (word.Length > 20)
-                {
-                    level = 5;
-                }
-
-                var wordToAdd = new Words()
-                {
-                    Name = word,
-                    Level = level
-                };
-
-                var isInDB = dbContext.Words.Any(x => x.Name.ToLower() == word);
-
-                if (isInDB)
-                {
-                    Console.WriteLine("{0} is already available", word, Color.Red);
-                }
-                else
-                {
-                    wordsToAdd.Add(wordToAdd);
-                }
-            }
-
-            dbContext.Words.AddOrUpdate(wordsToAdd.ToArray());
-            dbContext.SaveChanges();
 
             Menu.Initialize();
         }

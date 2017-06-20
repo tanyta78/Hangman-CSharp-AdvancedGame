@@ -32,7 +32,7 @@ public class PleaseWait : IDisposable
                 i = 1;
             }
             Console.Clear();
-            Console.WriteLine("Loading" + new string('.',i));
+            Console.WriteLine("Loading" + new string('.', i));
             Thread.Sleep(500);
             i++;
         }
