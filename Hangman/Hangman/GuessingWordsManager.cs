@@ -16,7 +16,6 @@ namespace Hangman
 {
     public class GuessingWordsManager
     {
-        //        private const string wordsPath = "../../Dictionary/words.txt";
         private static HangmanContext dbContext = new HangmanContext();
 
         private static char startingChar { get; set; }
@@ -51,7 +50,6 @@ namespace Hangman
             t.SetApartmentState(ApartmentState.STA);
             t.Start();
             t.Join();
-            //Console.WriteLine(wordsPath);
 
             if (!exited)
             {
@@ -65,6 +63,7 @@ namespace Hangman
 
                 var wordsToAdd = new List<Words>();
 
+                //determine level of hardness for each word
                 foreach (var word in words)
                 {
                     if (word.Length <= 5)
@@ -98,7 +97,8 @@ namespace Hangman
 
                     if (isInDB)
                     {
-                        Console.WriteLine("{0} is already available", word, Color.Red);
+                        Console.Write(word,Color.LightPink);
+                        Console.Write(" is already available\n", Color.Red);
                     }
                     else
                     {
@@ -107,7 +107,23 @@ namespace Hangman
                 }
 
                 dbContext.Words.AddOrUpdate(wordsToAdd.ToArray());
-                dbContext.SaveChanges();
+                try
+                {
+                    dbContext.SaveChanges();
+
+                    foreach (var word in wordsToAdd)
+                    {
+                        Console.Write(word.Name, Color.LightPink);
+                        Console.Write(" added successfully\n", Color.LimeGreen);
+                    }
+
+                    Thread.Sleep(1500);
+                }
+                catch (Exception e)
+                {
+                    System.Console.WriteLine(e);
+                    throw;
+                }
             }
 
             Menu.Initialize();
@@ -176,7 +192,6 @@ namespace Hangman
                 }
             }
         }
-
 
         private static bool areYouSure()
         {
@@ -581,11 +596,6 @@ namespace Hangman
             var allowedLines = Constants.ConsoleDictionaryHeigth - 8;
 
             int pages = filtered.Count / allowedLines;
-
-//            if (pages == 0)
-//            {
-//                currentPage = 0;
-//            }
 
             if (filtered.Count % Constants.ConsoleDictionaryHeigth != 0)
             {
