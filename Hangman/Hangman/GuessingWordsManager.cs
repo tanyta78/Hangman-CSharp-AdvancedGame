@@ -325,10 +325,13 @@ namespace Hangman
             Console.Clear();
             Mode.Set(GameMode.Dictionary);
 
-            var words = dbContext.Words.Select(x => x.Name).ToList();
             //create query to db if list is empty
+            if (WordsList == null || WordsList.Count == 0)
+            {
+                WordsList = dbContext.Words.Select(x => x.Name).ToList();
+            }
 
-            filtered = words.Where(w => w.ToLower()[0] == startingChar.ToString().ToLower()[0]).OrderBy(w => w).ToList();
+            filtered = WordsList.Where(w => w.ToLower()[0] == startingChar.ToString().ToLower()[0]).OrderBy(w => w).ToList();
 
             if (selectedWordId == filtered.Count)
             {
