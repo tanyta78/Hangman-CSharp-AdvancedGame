@@ -264,12 +264,24 @@ namespace Hangman
             Console.WriteLine("Press Tab to switch to character selection mode: ", Color.LightPink);
         }
 
+        private static void LoadWords()
+        {
+            using (new PleaseWait())
+            {
+                //create query to db if list is empty
+                if (WordsList == null || WordsList.Count == 0)
+                {
+                    WordsList = dbContext.Words.Select(x => x.Name).ToList();
+                }
+            }
+        }
+
         public static void ListWords()
         {
             Console.Clear();
             Mode.Set(GameMode.Dictionary);
 
-            WordsList = dbContext.Words.Select(x => x.Name).ToList();
+            LoadWords();
             var groupedWords = WordsList.Where(w => !string.IsNullOrWhiteSpace(w)).GroupBy(w => w.ToLower()[0])
                 .OrderBy(g => g.Key);
 
@@ -348,16 +360,12 @@ namespace Hangman
             Console.Clear();
             Mode.Set(GameMode.Dictionary);
 
-            //create query to db if list is empty
-            if (WordsList == null || WordsList.Count == 0)
-            {
-                WordsList = dbContext.Words.Select(x => x.Name).ToList();
-            }
+            LoadWords();
 
             selectedWordId = 0;
             filtered = WordsList.Where(w => w.ToLower()[0] == startingChar.ToString().ToLower()[0]).OrderBy(w => w)
                 .ToList();
-            
+
             int currentPage = 1;
 
             var allowedLines = Constants.ConsoleDictionaryHeigth - 3;
