@@ -86,7 +86,9 @@ namespace Hangman
                 {
                     guessed.Add(letter);
                     mistakes++;
-                    if (mistakes > Constants.AllowedMistakes)
+                    gibbet.Update();
+                    DrawGame(guesser, guessed, word, gibbet);
+                    if (mistakes >= Constants.AllowedMistakes)
                     {
                         isWon = false;
                         currentScore = ScoreBoard.GetScore();
@@ -94,10 +96,12 @@ namespace Hangman
                         DisplayResult();
                         break;
                     }
-                    gibbet.Update();
+                    
                 }
 
                 guesser.Update(letter);
+
+                DrawGame(guesser, guessed, word, gibbet);
             }
             currentScore = ScoreBoard.GetScore();
             finalScore += currentScore;
