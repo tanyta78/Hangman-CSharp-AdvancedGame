@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 using System.Threading;
 
 public class PleaseWait : IDisposable

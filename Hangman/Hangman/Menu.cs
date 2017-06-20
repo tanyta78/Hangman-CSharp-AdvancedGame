@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using Hangman.Utilities;
     using Console = Colorful.Console;
-    using System.Threading;
 
     public class Menu
     {

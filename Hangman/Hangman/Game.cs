@@ -17,7 +17,7 @@ namespace Hangman
         private static string word { get; set; }
         private static HangmanContext dbContext = new HangmanContext();
         private static int gameLevel = 1;
-        private static Users player = dbContext.Users.Where(x => x.Name == UserManager.CurrentUser).FirstOrDefault();
+        private static Users player = dbContext.Users.FirstOrDefault(x => x.Name == UserManager.CurrentUser);
         private static double finalScore = 0d;
         private static double currentScore = 0d;
         private static GibbetDrawing gibbet;
@@ -30,7 +30,13 @@ namespace Hangman
             while (gameLevel < 6 && isWon)
             {
                 mistakes = 0;
-                var words = dbContext.Words.Where(x => x.Level == gameLevel).Select(x => x.Name).ToArray();
+                string[] words;
+
+                using (new PleaseWait())
+                {
+                    words = dbContext.Words.Where(x => x.Level == gameLevel).Select(x => x.Name).ToArray();
+                }
+
                 PlayGame(words);
                 ScoreBoard score = new ScoreBoard(gameLevel, mistakes);
 
@@ -63,11 +69,10 @@ namespace Hangman
             HashSet<char> guessed = new HashSet<char>();
 
             //11 rows for user info output
-            gibbet = new GibbetDrawing(0,Constants.GibbetHeight + 11);
+            gibbet = new GibbetDrawing(0, Constants.GibbetHeight + 11);
 
             while (guesser.ToString() != word && mistakes <= Constants.AllowedMistakes)
             {
-                //display word guesser clears whole console => gibbet too
                 DrawGame(guesser, guessed, word, gibbet);
 
                 Console.SetCursorPosition(gibbet.Location[0], gibbet.Location[1] + 2);
@@ -96,7 +101,6 @@ namespace Hangman
                         DisplayResult();
                         break;
                     }
-                    
                 }
 
                 guesser.Update(letter);
@@ -105,6 +109,14 @@ namespace Hangman
             currentScore = ScoreBoard.GetScore();
             finalScore += currentScore;
         }
+
+        /// <summary>
+        /// Displays 11 rows of user info + gibbet drawing
+        /// </summary>
+        /// <param name="guesser"></param>
+        /// <param name="guessed"></param>
+        /// <param name="word"></param>
+        /// <param name="gibbet"></param>
         private static void DrawGame(WordGuesser guesser, HashSet<char> guessed, string word, GibbetDrawing gibbet)
         {
             Console.Clear();
@@ -121,11 +133,11 @@ namespace Hangman
             Console.WriteLine(String.Join(" ", guessed), Color.Red);
             Console.WriteLine();
             gibbet.Print();
-
         }
+
         private static void DisplayResult()
         {
-            Console.SetCursorPosition(0,gibbet.Location[1] + 2);
+            Console.SetCursorPosition(0, gibbet.Location[1] + 2);
             if (isWon)
             {
                 Console.WriteLine("You got my word!");
@@ -138,6 +150,5 @@ namespace Hangman
                 Console.WriteLine($"Your word was {word}, Score:{finalScore:F0}", Color.Aqua);
             }
         }
-
     }
 }
