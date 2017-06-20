@@ -490,7 +490,7 @@ namespace Hangman
                 WordsList = dbContext.Words.Select(x => x.Name).ToList();
             }
 
-            //TODO: WHEN A LETTER BUTTON IS CLICKED 
+            //TODO: WHEN A BACKSPACE BUTTON IS CLICKED 
             ListWords(substring);
 
             char character = 'a';
@@ -502,14 +502,25 @@ namespace Hangman
                 PrintAlphabet();
                 return;
             }
+            else if (LastKeyPressed.Key == ConsoleKey.Backspace)
+            {
+                substring = substring.Substring(0, substring.Length - 1);
+            }
 
             var lastKeyChar = LastKeyPressed.KeyChar.ToString().ToLower()[0];
             if (lastKeyChar >= 'a' && lastKeyChar <= 'z') // is a letter
             {
                 character = lastKeyChar;
             }
+            else if (lastKeyChar == '\b')
+            {
+                //TODO: THERE IS NO EMPTY CHAR, FIND A WAY TO APPEND NOTHING
+                //if backspace do nothing
+                character = ""[0];
+            }
             else
             {
+                //bad input, read again
                 var input = Console.ReadKey();
                 character = input.KeyChar;
             }
@@ -520,7 +531,16 @@ namespace Hangman
         private static void PrintSearched(string substring)
         {
             Console.SetCursorPosition(0, 4);
+            ClearCurrentConsoleLine();
             Console.WriteLine("Searched word: " + substring);
+        }
+
+        public static void ClearCurrentConsoleLine()
+        {
+            int currentLineCursor = Console.CursorTop;
+            Console.SetCursorPosition(0, Console.CursorTop);
+            Console.Write(new string(' ', Console.WindowWidth));
+            Console.SetCursorPosition(0, currentLineCursor);
         }
 
         private static void ListWords(string substring)
@@ -580,6 +600,7 @@ namespace Hangman
                 switch (key.Key)
                 {
                     case ConsoleKey.Tab:
+                    case ConsoleKey.Backspace:
                         exit = true;
                         break;
                     case ConsoleKey.LeftArrow:
