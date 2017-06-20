@@ -483,12 +483,7 @@ namespace Hangman
         /// <param name="substring"></param>
         private static void Search(string substring = "")
         {
-            //create query to db if list is empty
-            if (WordsList == null || WordsList.Count == 0)
-            {
-                WordsList = dbContext.Words.Select(x => x.Name).ToList();
-            }
-
+            LoadWords();
             ListWords(substring);
 
             //on input - CAN INPUT LETTERS and TAB ONLY
