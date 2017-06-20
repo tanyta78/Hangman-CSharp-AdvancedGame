@@ -495,10 +495,9 @@ namespace Hangman
                 WordsList = dbContext.Words.Select(x => x.Name).ToList();
             }
 
-            //TODO: WHEN A BACKSPACE BUTTON IS CLICKED 
             ListWords(substring);
 
-            char character = 'a';
+            string character = "";
 
             //on input - CAN INPUT LETTERS and TAB ONLY
             if (LastKeyPressed.Key == ConsoleKey.Tab)
@@ -515,19 +514,17 @@ namespace Hangman
             var lastKeyChar = LastKeyPressed.KeyChar.ToString().ToLower()[0];
             if (lastKeyChar >= 'a' && lastKeyChar <= 'z') // is a letter
             {
-                character = lastKeyChar;
+                character = lastKeyChar.ToString();
             }
             else if (lastKeyChar == '\b')
             {
-                //TODO: THERE IS NO EMPTY CHAR, FIND A WAY TO APPEND NOTHING
                 //if backspace do nothing
-                character = ""[0];
             }
             else
             {
                 //bad input, read again
                 var input = Console.ReadKey();
-                character = input.KeyChar;
+                character = input.KeyChar.ToString();
             }
            
             Search(substring + character);
