@@ -131,6 +131,7 @@ namespace Hangman
 
             while (pressedKey.Key != ConsoleKey.Escape)
             {
+                var flag = true;
                 switch (pressedKey.Key)
                 {
                     case ConsoleKey.RightArrow:
@@ -169,7 +170,9 @@ namespace Hangman
                         pressedKey = Console.ReadKey();
                         break;
                     case ConsoleKey.Tab:
-                        Search();
+                        flag = Search();
+                        PrintAlphabet();
+                        pressedKey = Console.ReadKey();
                         break;
                 }
             }
@@ -487,8 +490,9 @@ namespace Hangman
         /// Searches through the loaded words on character input for words starting with the current substring
         /// </summary>
         /// <param name="substring"></param>
-        private static void Search(string substring = "")
+        private static bool Search(string substring = "")
         {
+            PrintAlphabet("");
             //create query to db if list is empty
             if (WordsList == null || WordsList.Count == 0)
             {
@@ -504,11 +508,18 @@ namespace Hangman
             {
                 //recursion bottom 
                 PrintAlphabet();
-                return;
+                return false;
             }
             else if (LastKeyPressed.Key == ConsoleKey.Backspace)
             {
-                substring = substring.Substring(0, substring.Length - 1);
+                try
+                {
+                    substring = substring.Substring(0, substring.Length - 1);
+                }
+                catch (ArgumentOutOfRangeException e)
+                {
+                    return false;
+                }
             }
 
             var lastKeyChar = LastKeyPressed.KeyChar.ToString().ToLower()[0];
@@ -519,6 +530,11 @@ namespace Hangman
             else if (lastKeyChar == '\b')
             {
                 //if backspace do nothing
+                if (substring == "")
+                {
+                    LastKeyPressed = new ConsoleKeyInfo();
+                    return false;
+                }
             }
             else
             {
@@ -526,8 +542,13 @@ namespace Hangman
                 var input = Console.ReadKey();
                 character = input.KeyChar.ToString();
             }
-           
-            Search(substring + character);
+
+            if (!Search(substring + character))
+            {
+                return false;
+            }
+
+            return Search(substring + character);
         }
 
         private static void PrintSearched(string substring)
@@ -562,11 +583,15 @@ namespace Hangman
 
             int pages = filtered.Count / allowedLines;
 
+//            if (pages == 0)
+//            {
+//                currentPage = 0;
+//            }
+
             if (filtered.Count % Constants.ConsoleDictionaryHeigth != 0)
             {
                 pages++;
             }
-
 
             //draw pages loop
             while (true)
@@ -593,7 +618,15 @@ namespace Hangman
 
                 //print navigation info
                 Console.WriteLine("Right/Left arrow to navigate", Color.Yellow);
-                Console.WriteLine($"Page {currentPage}|{pages}", Color.Yellow);
+
+                if (linesOnCurrentPage == 0 && currentPage == 1)
+                {
+                    Console.WriteLine($"Page 0|{pages}", Color.Yellow);
+                }
+                else
+                {
+                    Console.WriteLine($"Page {currentPage}|{pages}", Color.Yellow);
+                }
 
                 var key = Console.ReadKey();
 
