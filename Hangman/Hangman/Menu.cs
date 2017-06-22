@@ -12,6 +12,7 @@
         public static void Initialize()
         {
             ConsoleSetup.SetUp();
+            //UserManager.CreateAdmin();
             UserManager.TryReadUserFromFile();
 
             Mode.Set(GameMode.Menu);
@@ -26,6 +27,13 @@
             "Add words",
             "List words",
             "Delete word",
+            "View Highscores",
+            "Logout",
+            "Exit"
+        };
+        public static List<string> nonAdminChoices = new List<string>()
+        {
+            "Start Game",
             "View Highscores",
             "Logout",
             "Exit"
@@ -68,12 +76,16 @@
         {
             while (true)
             {
-                var currentChoices = choices;
+                var currentChoices = nonAdminChoices;
+
                 if (!SessionData.LoggedIn)
                 {
                     currentChoices = loggerChoices;
                 }
-
+                if (SessionData.IsAdmin)
+                {
+                    currentChoices = choices;
+                }
                 PrintChoices(currentChoices);
 
                 var pressedKey = Console.ReadKey().Key;
@@ -127,6 +139,13 @@
             {7, () => Console.WriteLine(Message.ThanksForPlaying, System.Drawing.Color.Gold) }
         };
 
+        private static Dictionary<int, Action> CommandsNonAdmin = new Dictionary<int, Action>()
+        {
+            {1, Game.StartGame },
+            {2, ScoreBoard.PrintScoreBoard },
+            {3, UserManager.LogOut },
+            {4, () => Console.WriteLine(Message.ThanksForPlaying, System.Drawing.Color.Gold) }
+        };
         private static void ExecuteCommand()
         {
             if (!Commands.ContainsKey(choice))
@@ -135,7 +154,15 @@
             }
             if (SessionData.LoggedIn)
             {
-                Commands[choice]();
+                if (SessionData.IsAdmin)
+                {
+                    Commands[choice]();
+                }
+                else
+                {
+                    CommandsNonAdmin[choice]();
+                }
+                
             }
             else
             {

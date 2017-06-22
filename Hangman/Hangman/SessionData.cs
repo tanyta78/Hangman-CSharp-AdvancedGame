@@ -10,6 +10,8 @@ namespace Hangman
     {
         public static bool LoggedIn { get; set; }
 
+        public static bool IsAdmin { get; set; }
+
         public static string UserDataPath = @".\..\..\user.txt";
 
         public static string ScoreBoardDataPath = @".\..\..\scoreboard.txt";
@@ -33,6 +35,14 @@ namespace Hangman
                 }
                 var userName = userData[0];
                 CurrentUser = userName;
+                if (CurrentUser.ToLower() == "admin")
+                {
+                    IsAdmin = true;
+                }
+                else
+                {
+                    IsAdmin = false;
+                }
                 LoggedIn = true;
             }
             else
@@ -66,6 +76,7 @@ namespace Hangman
         {
             File.Delete(UserDataPath);
             LoggedIn = false;
+            IsAdmin = false;
         }
     }
     

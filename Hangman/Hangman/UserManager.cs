@@ -22,6 +22,27 @@ namespace Hangman
             }
         }
 
+        //public static void CreateAdmin()
+        //{
+        //    var admin = dbContext.Users.FirstOrDefault();
+        //    Console.WriteLine(admin);
+        //    if (admin==null)
+        //    {
+        //        var passwordAmin = "admin";
+        //        var adminName = "Admin";
+        //        var newUser = new Users()
+        //    {
+        //        Name = passwordAmin,
+        //        Password = adminName,
+        //        Score = 0
+        //    };
+
+        //    dbContext.Users.Add(newUser);
+        //    dbContext.SaveChanges(); 
+        //    }
+
+            
+        //}
         public static void TryReadUserFromFile()
         {
             if (!SessionData.LoggedIn)

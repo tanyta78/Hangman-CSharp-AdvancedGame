@@ -1,2 +1,2 @@
-stamat
-123
+ADMIN
+admin
