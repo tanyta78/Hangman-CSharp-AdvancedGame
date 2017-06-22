@@ -190,7 +190,7 @@ namespace Hangman
                         pressedKey = Console.ReadKey();
                         break;
                     default:
-                        ClearCurrentConsoleLine();
+                        Functions.ClearCurrentConsoleLine();
                         pressedKey = Console.ReadKey();
                         break;
                 }
@@ -572,17 +572,11 @@ namespace Hangman
         private static void PrintSearched(string substring)
         {
             Console.SetCursorPosition(0, 4);
-            ClearCurrentConsoleLine();
+            Functions.ClearCurrentConsoleLine();
             Console.WriteLine("Searched word: " + substring);
         }
 
-        public static void ClearCurrentConsoleLine()
-        {
-            int currentLineCursor = Console.CursorTop;
-            Console.SetCursorPosition(0, Console.CursorTop);
-            Console.Write(new string(' ', Console.WindowWidth));
-            Console.SetCursorPosition(0, currentLineCursor);
-        }
+        
 
         private static void ListWords(string substring)
         {

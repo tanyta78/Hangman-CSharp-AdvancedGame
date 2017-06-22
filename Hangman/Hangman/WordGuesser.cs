@@ -39,7 +39,7 @@ namespace Hangman
         public char this[int index]
         {
             get
-            {
+            { 
                 return Content[index];
             }
             set

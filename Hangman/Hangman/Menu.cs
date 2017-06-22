@@ -12,7 +12,6 @@
         public static void Initialize()
         {
             ConsoleSetup.SetUp();
-            //UserManager.CreateAdmin();
             UserManager.TryReadUserFromFile();
 
             Mode.Set(GameMode.Menu);

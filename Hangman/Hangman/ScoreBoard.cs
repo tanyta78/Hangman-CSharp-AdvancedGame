@@ -71,7 +71,7 @@ namespace Hangman
                 Colorful.Console.WriteLine($"  {j + 1}.{topPlayers[j].Name.PadRight(15)}{topPlayers[j].Score:F0} points", Color.Crimson);
                 Colorful.Console.WriteLine("---------------------------------", Color.GreenYellow);
             }
-            Colorful.Console.WriteLine("Press any key to go back",Color.GreenYellow);
+            Colorful.Console.WriteLine(Message.PressAnyKey,Color.GreenYellow);
             Colorful.Console.ReadKey();
             Menu.Initialize();
         }
@@ -90,11 +90,11 @@ namespace Hangman
 
                 bestPlayerNames[indexInScoreBoard] = player.Name;
                 mistakes[indexInScoreBoard] = playerMistakes;
-                Colorful.Console.WriteLine("You enter our highscore list! Congratulations!", Color.Aqua);
+                Colorful.Console.WriteLine(Message.HighScoreEnter, Color.Aqua);
             }
             else
             {
-                Colorful.Console.WriteLine("You score is not enougth to enter our highscore list! Maybe next time!", Color.DarkOrange);
+                Colorful.Console.WriteLine(Message.ScoreNotEnough, Color.DarkOrange);
             }
         }
 
