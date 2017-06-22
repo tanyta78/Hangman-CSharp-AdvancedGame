@@ -124,7 +124,14 @@ namespace Hangman
             Console.WriteLine($"Player:{player.Name}  --  Best score:{player.Score:F0}", Color.Khaki);
             Console.WriteLine("----------------------------------", Color.Aquamarine);
             Console.WriteLine($"Current level:{gameLevel}    {Message.ChooseLetter}", Color.Khaki);
-            Console.WriteLine("----------------------------------", Color.Aquamarine);
+            if (!Constants.DEBUG_MODE)
+            {
+                Console.WriteLine($"---------DEBUG: {word}--------", Color.Aquamarine);
+            }
+            else
+            {
+                Console.WriteLine("----------------------------------", Color.Aquamarine);
+            }
             Console.WriteLine();
             Console.WriteLine(guesser.ToString(), Color.CornflowerBlue);
             Console.WriteLine();

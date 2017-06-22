@@ -22,5 +22,7 @@
         public const double mistakePercent = 0.05;
 
         public const int GibbetHeight = 15;
+
+        public const bool DEBUG_MODE = false;
     }
 }
