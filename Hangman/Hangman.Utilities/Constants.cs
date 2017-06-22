@@ -2,25 +2,25 @@
 {
     public class Constants
     {
-        public static int AllowedMistakes = 8;
+        public const int AllowedMistakes = 8;
 
-        public static int ConsoleMenuWidth = 60;
-        public static int ConsoleMenuHeigth = 15;
+        public const int ConsoleMenuWidth = 60;
+        public const int ConsoleMenuHeigth = 15;
 
-        public static int ConsoleGameWidth = 60;
-        public static int ConsoleGameHeigth = 50;
+        public const int ConsoleGameWidth = 60;
+        public const int ConsoleGameHeigth = 50;
 
-        public static int ConsoleDictionaryWidth = 80;
-        public static int ConsoleDictionaryHeigth = 15;
+        public const int ConsoleDictionaryWidth = 80;
+        public const int ConsoleDictionaryHeigth = 15;
 
-        public static double levelOne = 1.1;
-        public static double levelTwo = 1.2;
-        public static double levelThree = 1.3;
-        public static double levelFour = 1.4;
-        public static double levelFive = 1.5;
+        public const double levelOne = 1.1;
+        public const double levelTwo = 1.2;
+        public const double levelThree = 1.3;
+        public const double levelFour = 1.4;
+        public const double levelFive = 1.5;
 
-        public static double mistakePercent = 0.05;
+        public const double mistakePercent = 0.05;
 
-        public static int GibbetHeight = 15;
+        public const int GibbetHeight = 15;
     }
 }

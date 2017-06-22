@@ -97,7 +97,7 @@ namespace Hangman
 
                     if (isInDB)
                     {
-                        Console.Write(word,Color.LightPink);
+                        Console.Write(word, Color.LightPink);
                         Console.Write(" is already available\n", Color.Red);
                     }
                     else
@@ -187,6 +187,10 @@ namespace Hangman
                     case ConsoleKey.Tab:
                         flag = Search();
                         PrintAlphabet();
+                        pressedKey = Console.ReadKey();
+                        break;
+                    default:
+                        ClearCurrentConsoleLine();
                         pressedKey = Console.ReadKey();
                         break;
                 }
